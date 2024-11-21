@@ -1,0 +1,161 @@
+extends ../../layouts/default.pug  
+
+
+block main   
+    h1(class='text-[24px] px-[30px] py-[25px] h-[80px] bg-gray-200 my-[12px] ml-[10px] font-[500]') #{pageTitle}  
+
+    if(records)  
+      div(data-records=records)  
+
+      div(class="text-right mb-3")  
+        button(  
+          type="submit"  
+          class="bg-blue-500 text-white font-semibold p-[5px] rounded-[4px]"  
+          button-submit  
+        ) Cập nhật  
+
+      table(  
+        class="min-w-full border border-gray-200 divide-y divide-gray-300 mx-[10px]"  
+        table-permissions  
+      )  
+        thead  
+          tr  
+            th(class="px-[3px] py-[4px] text-left") Tính năng  
+            each item in records  
+              th(class="text-center px-[3px] py-[4px]") #{item.title}  
+        tbody  
+          tr(data-name="id" class="hidden")  
+            td  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px]")  
+                input(type="text" value=item.id class="border rounded-md")  
+
+          //- Danh mục sản phẩm  
+          tr  
+            td(colspan="3" class="font-bold px-[3px] py-[4px]")  
+              b Danh mục sản phẩm  
+          tr(data-name="products-category_view" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xem  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="products-category_create" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Thêm mới  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="products-category_edit" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Chỉnh sửa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="products-category_delete" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xóa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+          //- Hết Danh mục sản phẩm  
+
+          //- Danh sách sản phẩm  
+          tr  
+            td(colspan="4" class="font-bold px-[3px] py-[4px]")  
+              b Danh sách sản phẩm  
+          tr(data-name="products_view" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xem  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="products_create" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Thêm mới  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="products_edit" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Chỉnh sửa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="products_delete" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xóa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          //- Nhóm quyền  
+          tr  
+            td(colspan="4" class="font-bold px-[3px] py-[4px]")  
+              b Nhóm quyền  
+          tr(data-name="roles_view" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xem  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="roles_create" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Thêm mới  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="roles_edit" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Chỉnh sửa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="roles_delete" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xóa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="roles_permissions" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Phân quyền  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+          //- Tài khoản  
+          tr  
+            td(colspan="4" class="font-bold px-[3px] py-[4px]")  
+              b Tài khoản  
+          tr(data-name="account_view" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xem  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="account_create" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Thêm mới  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="account_edit" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Chỉnh sửa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="account_delete" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xóa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")     
+      form(  
+        form-change-permissions  
+        method="POST"  
+        action=`/${prefixAdmin}/roles/permissions?_method=PATCH`  
+        class="hidden"  
+      )  
+        div(class="form-group")  
+          input(  
+            type="text"  
+            class="border border-gray-300 rounded-md p-2 w-full"  
+            name="roles"  
+        )

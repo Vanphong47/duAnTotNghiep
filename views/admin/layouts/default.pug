@@ -1,0 +1,23 @@
+doctype html 
+html 
+  head 
+    title #{pageTitle}
+    script(src="https://cdn.tailwindcss.com")
+    script(src="assets/tailwind.config.js")
+    link(rel="stylesheet", href="/admin/css/style.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css")
+
+  body
+
+    include ../partials/header.pug
+
+    .h-full.flex
+      include ../partials/sider.pug
+
+      .main.flex-1 
+        block main 
+
+    script(src="/tinymce/tinymce.min.js")
+    script(src="/admin/js/tinymce-config.js")
+    
+    script(src="/admin/js/script.js")    

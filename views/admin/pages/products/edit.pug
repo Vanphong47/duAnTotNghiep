@@ -1,0 +1,57 @@
+extends ../../layouts/default.pug
+include ../../mixin/alert.pug
+include ../../mixin/select-tree.pug
+
+
+
+block main
+    +alert-error(5000)
+    +alert-success(5000)
+    .container.bg-white(class='mx-[10px]')
+        h1(class='text-[24px] my-[8px]') Chỉnh sửa sản phẩm
+        form(
+            action=`/${prefixAdmin}/products/edit/${product.id}?_method=PATCH`
+            method='POST'
+            enctype="multipart/form-data"
+            )
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='title') Tiêu đề
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#title(type='text', name='title', required, value=product.title)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='product_category_id') Danh mục
+                select#product_category_id.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2(name='product_category_id')
+                    option(value) -- Chọn danh mục cha -- 
+                    if(records)
+                      +select-tree(records, 1, product.product_category_id)
+            .mb-4.flex.items-center
+                input.mr-2#featured1(type='radio', name='featured', value='1')
+                label.text-sm.font-medium.text-gray-700(for='featured1') Nổi bật
+                input.mr-2.ml-4#featured0(type='radio', name='featured', value='0', checked)
+                label.text-sm.font-medium.text-gray-700(for='featured0') Không
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='desc') Mô tả
+                textarea.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#desc(name='description', rows='5', textarea-mce) #{product.description}
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='price') Giá
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#price(type='number', name='price', value=product.price, min='0')
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='discount') % Giảm giá
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#discount(type='number', name='discountPercentage', value=product.discountPercentage, min='0')
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='stock') Số lượng
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#stock(type='number', name='stock', value=product.stock, min='0')
+            .mb-4(upload-image)
+                label.block.text-sm.font-medium.text-gray-700(for='thumbnail') Ảnh
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#thumbnail(type='file', name='thumbnail', accept='image/*', upload-image-input)
+                img.image-preview.mt-2(src=product.thumbnail, upload-image-preview)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='position') Vị trí
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#position(type='number', name='position', placeholder='Tự động tăng', min='1', value=product.position)
+            .mb-4.flex.items-center
+                input.mr-2#statusActive(type='radio', name='status', value='active', checked=(product.status == "active" ? true : false))
+                label.text-sm.font-medium.text-gray-700(for='statusActive') Hoạt động
+                input.mr-2.ml-4#statusInActive(type='radio', name='status', value='inactive', checked=(product.status == "inactive" ? true : false))
+                label.text-sm.font-medium.text-gray-700(for='statusInActive') Dừng hoạt động
+            .mb-4
+                button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Cập nhật
+    script(src='/admin/js/product.js')

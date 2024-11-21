@@ -1,0 +1,16 @@
+mixin sort(options)
+    div(
+    class="ml-[8px]"
+    sort
+    ) 
+        select(
+            name="sort"
+            sort-select
+            class="p-[10px] border rounded-[8px]"
+        )
+          each item in options 
+            option(value=item.value) #{item.lable}
+        button(
+            class=" border rounded-[8px] p-[10px] text-white bg-red-500"
+            sort-clear
+        ) Clear

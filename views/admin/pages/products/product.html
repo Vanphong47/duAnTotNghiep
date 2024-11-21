@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="ml-[10px] border-1 h-[120px] w-full">
+        <div class=" bg-[#D5D5D5] text-[24px] p-[12px]">
+            Bộ lọc và tìm kiếm
+        </div>
+        <div class="flex p-[10px] justify-between">
+            <div>
+                <button class="text-white p-[10px] rounded-[8px] bg-[#1876D2] border mr-[10px]">Tất cả</button>
+                <button class="p-[10px] rounded-[8px] border mr-[10px]">Hoạt động</button>
+                <button class="p-[10px] rounded-[8px] border ">Dừng hoạt động</button>
+            </div>
+            <form action="">
+                <input 
+                    type="text" 
+                    placeholder="Nhập từ khóa..." 
+                    name="keyword"
+                    class="p-[10px] outline-none border-[1px] flex-1">
+                <button 
+                    class="p-[10px] border-[1px] hover:bg-[#1876D2] hover:text-white"
+                    type="submit"
+                >
+                    Tìm
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="text-[24px] font-bold px-[30px] py-[35px]">Danh sách sản phẩm</h2>
+    <form action="">
+        <select name="type" id="" class="p-[10px] border">
+            <option value="active">Hoat dong</option>
+            <option value="inactive">Dung hoat dong</option>
+        </select>
+        <input type="text" class="p-[10px] border">
+        <button class="p-[10px] border"> Ap dung </button>
+    </form>
+    <table class="w-full border-collapse border border-gray-300">  
+        <thead>  
+            <tr class="bg-gray-200">  
+                <th class="border border-gray-300 px-4 py-2 text-left">STT</th>  
+                <th class="border border-gray-300 px-4 py-2 text-left">Hình Ảnh</th>  
+                <th class="border border-gray-300 px-4 py-2 text-left">Tiêu Đề</th>  
+                <th class="border border-gray-300 px-4 py-2 text-left">Giá</th>  
+                <th class="border border-gray-300 px-4 py-2 text-left">Trạng Thái</th>  
+                <th class="border border-gray-300 px-4 py-2 text-left">Hành Động</th>  
+            </tr>  
+        </thead>  
+        <tbody>  
+            <tr class="bg-white">  
+                <td class="border border-gray-300 px-4 py-2">1</td>  
+                <td class="border border-gray-300 px-4 py-2">
+                    <img src="apple.jpg" alt="Gốm 1" class="w-16 h-16 object-cover">
+                </td>  
+                <td class="border border-gray-300 px-4 py-2">Gốm Bát Tràng</td>  
+                <td class="border border-gray-300 px-4 py-2">250,000 VNĐ</td>  
+                <td class="border border-gray-300 px-4 py-2">
+                    <button class="bg-blue-500 text-white px-2 py-1 rounded">Hoạt động</button>
+                </td>  
+                <td class="border border-gray-300 px-4 py-2">  
+                    <button class="bg-yellow-500 text-white px-2 py-1 rounded">Sửa</button>  
+                    <button class="bg-red-500 text-white px-2 py-1 rounded">Xóa</button>  
+                </td>  
+            </tr>  
+            <tr class="bg-gray-100">  
+                <td class="border border-gray-300 px-4 py-2">2</td>  
+                <td class="border border-gray-300 px-4 py-2">
+                    <img src="apple.jpg" alt="Gốm 2" class="w-16 h-16 object-cover">
+                </td>  
+                <td class="border border-gray-300 px-4 py-2">Gốm Chén Đĩa</td>  
+                <td class="border border-gray-300 px-4 py-2">150,000 VNĐ</td>  
+                <td class="border border-gray-300 px-4 py-2">
+                    <button class="bg-red-500 text-white px-2 py-1 rounded">Dừng hoạt động</button>
+                </td>  
+                <td class="border border-gray-300 px-4 py-2">  
+                    <button class="bg-yellow-500 text-white px-2 py-1 rounded">Sửa</button>  
+                    <button class="bg-red-500 text-white px-2 py-1 rounded">Xóa</button>  
+                </td>  
+            </tr>   
+        </tbody>  
+    </table>
+
+    <nav>
+        <ul class="flex p-[10px] m-[30px]">
+            <li class="ml-[8px]">
+                <button class="p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white">
+                    <i class="fa-solid fa-backward"></i>
+                </button>
+            </li>
+            <li class="ml-[8px]">
+                <button class="p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white">
+                    1
+                </button>
+            </li>
+            <li class="ml-[8px]">
+                <button class="p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white">
+                    2
+                </button>
+            </li>
+            <li class="ml-[8px]">
+                <button class="p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white">
+                    <i class="fa-solid fa-forward"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,45 @@
+extends ../../layouts/default.pug
+include ../../mixin/alert.pug
+include ../../mixin/select-tree.pug
+
+
+
+
+block main
+    +alert-error(5000)
+    +alert-success(5000)
+    .container.bg-white(class='mx-[10px]')
+        h1(class='text-[24px] my-[8px]') Thêm mới danh mục sản phẩm
+        form(
+            action=`/${prefixAdmin}/products-category/create`
+            method='POST'
+            id="form-create-product"
+            enctype="multipart/form-data"
+            )
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='title') Tiêu đề
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#title(type='text', name='title', required)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='parent_id') Danh mục cha
+                select.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#parent_id(name='parent_id') 
+                  option(value="") -- Chọn danh mục cha -- 
+                    if(records)
+                      +select-tree(records)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='desc') Mô tả
+                textarea.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#desc(name='description', rows='5', textarea-mce)
+            .mb-4(upload-image)
+                label.block.text-sm.font-medium.text-gray-700(for='thumbnail') Ảnh
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#thumbnail(type='file', name='thumbnail', accept='image/*', upload-image-input)
+                img.image-preview.mt-2(src, upload-image-preview)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='position') Vị trí
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#position(type='number', name='position', placeholder='Tự động tăng', min='1')
+            .mb-4.flex.items-center
+                input.mr-2#statusActive(type='radio', name='status', value='active', checked)
+                label.text-sm.font-medium.text-gray-700(for='statusActive') Hoạt động
+                input.mr-2.ml-4#statusInActive(type='radio', name='status', value='inactive')
+                label.text-sm.font-medium.text-gray-700(for='statusInActive') Dừng hoạt động
+            .mb-4
+                button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Tạo mới
+    script(src='/admin/js/product.js')

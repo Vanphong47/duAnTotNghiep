@@ -1,0 +1,129 @@
+extends ../../layouts/default.pug
+include ../../mixin/filterState.pug
+include ../../mixin/search.pug
+include ../../mixin/pagination.pug
+include ../../mixin/form-change-multi.pug
+include ../../mixin/alert.pug
+include ../../mixin/sort.pug
+
+block main
+  +alert-success(5000)
+  .border-1(class='mx-[8px] my-[10px] border')
+    div(class='bg-[#E5E7EB] text-[24px] p-[12px]')
+        | Bộ lọc và tìm kiếm
+    .flex.justify-between(class='p-[12px]')
+        div(class="mb-[3px]")
+            +filterState(filterState)
+        +search(keyword)
+  div(class="border mx-[8px]")      
+    h1(class='text-[24px] p-[12px] w-full bg-gray-200 font-[500]') #{pageTitle}
+    div.flex.justify-between(class='px-[12px] pt-[12px]')
+        div.flex
+            +form-change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
+            +sort([
+                {
+                    lable: "Vị trí giảm dần",
+                    value: "position-desc"
+                },
+                {
+                    lable: "Vị trí tăng dần",
+                    value: "position-asc"
+                },
+                {
+                    lable: "Giá giảm dần",
+                    value: "price-desc"
+                },
+                {
+                    lable: "Giá tăng dần",
+                    value: "price-asc"
+                },
+                {
+                    lable: "Tiêu đề A - Z",
+                    value: "title-desc"
+                },
+                {
+                    lable: "Tiêu đề Z - A",
+                    value: "title-asc"
+                },
+            ])
+        button(class='w-[100px] h-[40px] border hover:bg-[#1876D2] rounded-[8px]')
+            a(
+                href=`/${prefixAdmin}/products/create`
+            ) + Thêm mới
+
+  table.border-collapse.border.border-gray-300(class='ml-[8px] my-[10px] w-[75%]' checkbox-multi)
+    thead
+        tr.bg-gray-200
+            th.border.border-gray-300.px-2.py-2.text-left
+                input(
+                    type='checkbox'
+                    name='checkall'
+                ) 
+            th.border.border-gray-300.px-2.py-2.text-left STT
+            th.border.border-gray-300.px-4.py-2.text-left Hình Ảnh
+            th.border.border-gray-300.px-4.py-2.text-left Tiêu Đề
+            th.border.border-gray-300.px-4.py-2.text-left Giá
+            th Vị trí
+            th.border.border-gray-300.px-4.py-2.text-left Trạng Thái
+            th.border.border-gray-300.px-4.py-2.text-left Hành Động
+        each item, index in products    
+            tr.bg-white.border.border-gray-300.px-4.py-2
+                td.border.border-gray-300(class='hover:bg-gray-200')
+                    input(class='relative left-[25%]')(
+                        type='checkbox'
+                        name='id'
+                        value=item.id
+                    )
+                td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200') #{index + 1}
+                td.border.border-gray-300.px-10.py-4(class='hover:bg-gray-200')
+                    img.w-16.h-16.object-cover(src=item.thumbnail alt=item.thumbnail)
+                td.border.border-gray-300.px-10.py-4(class='hover:bg-gray-200') #{item.title}
+                td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200') #{item.price}$
+                td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200')
+                  input(
+                    type="number"
+                    name="position"
+                    style="width: 40px"
+                    min="1"
+                    value=item.position
+                    class='border text-center'
+                  )
+                td.border.border-gray-300.px-5.py-2(class='hover:bg-gray-200')
+                    if(item.status == 'active')
+                        a(
+                            href='javascript:;' 
+                            class="bg-blue-500 text-white px-2 py-1 rounded"
+                            data-id = item.id 
+                            data-status = item.status 
+                            button-change-status
+                        ) Hoạt động
+                    else 
+                        a(
+                            href='javascript:;' 
+                            class="bg-red-500 text-white px-2 py-1 rounded"
+                            data-id = item.id 
+                            data-status = item.status 
+                            button-change-status
+                        ) Dừng hoạt động    
+                td.border.border-gray-300.px-10.py-2(class='hover:bg-gray-200')
+                    a(href=`/${prefixAdmin}/products/detail/${item.id}`)
+                        button.bg-gray-500.text-white.px-2.py-1.rounded(class='mr-[5px]') Chi tiết
+                    a(href=`/${prefixAdmin}/products/edit/${item.id}`)
+                        button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') Sửa
+                    button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) Xóa
+  +pagination(pagination)
+
+  form(
+    form-change-status 
+    action=""
+    method="POST"
+    data-path=`/${prefixAdmin}/products/change-status`
+  )
+
+  form(
+    form-delete-item 
+    action=""
+    method="POST"
+    data-path=`/${prefixAdmin}/products/delete`
+  )  
+                     

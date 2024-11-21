@@ -1,0 +1,10 @@
+mixin search(keyword)
+    form(action='' id='form-search')
+        input.outline-none.flex-1(
+            type='text' 
+            placeholder='Nhập từ khóa...' 
+            name='keyword' 
+            class='p-[10px] border-[1px]'
+            value=keyword
+            )
+        button(class='p-[10px] border-[1px] hover:bg-[#1876D2] hover:text-white' type='submit') Tìm 

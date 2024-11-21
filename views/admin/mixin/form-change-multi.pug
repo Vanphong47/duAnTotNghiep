@@ -1,0 +1,22 @@
+mixin form-change-multi(action)
+  form(
+    action=action
+    method='POST'
+    form-change-multi
+    class='mb-[12px] ml-[8px]'
+  )
+    select(name="type" class="p-[10px] border outline-none rounded-[8px]") 
+      option(value="active") Hoạt động
+      option(value="inactive") Dừng hoạt động
+      option(value="change-position") Thay đổi vị trí
+      option(value="delete-all") Xóa tất cả  
+    input(
+        type="text"
+        class="p-[10px] border outline-none hidden"
+        name='ids'
+        value=''
+    )
+    button(
+        type='submit'
+        class="p-[10px] border bg-[#1876D2] text-white rounded-[8px]"
+    ) Áp dụng

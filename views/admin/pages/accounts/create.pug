@@ -1,0 +1,44 @@
+extends ../../layouts/default.pug
+
+
+
+
+block main
+    .container.bg-white(class='mx-[10px]')
+        h1(class='text-[24px] my-[8px]') Thêm mới tài khoản
+        form(
+            action=`/${prefixAdmin}/accounts/create`
+            method='POST'
+            enctype="multipart/form-data"
+            )
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='fullName') Họ tên *
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#fullname(type='text', name='fullName', required)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='email') Email *
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#email(type='email', name='email', required)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='password') Mật khẩu *
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#password(type='password', name='password', required)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='phone') Số điện thoại*
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#phone(type='text', name='phone', required)                                
+            .mb-4(upload-image)
+                label.block.text-sm.font-medium.text-gray-700(for='avatar') Avatar *
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#avatar(type='file', name='avatar', accept='image/*', upload-image-input)
+                img.image-preview.mt-2(src, upload-image-preview)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='role_id') Phân quyền
+                select.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#role_id(name='role_id') 
+                  option(disabled) -- Chọn -- 
+                  each item in roles
+                    option(value=item.id) #{item.title}
+                                    
+            .mb-4.flex.items-center
+                input.mr-2#statusActive(type='radio', name='status', value='active', checked)
+                label.text-sm.font-medium.text-gray-700(for='statusActive') Hoạt động
+                input.mr-2.ml-4#statusInActive(type='radio', name='status', value='inactive')
+                label.text-sm.font-medium.text-gray-700(for='statusInActive') Dừng hoạt động
+            .mb-4
+                button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Tạo mới
+    script(src='/admin/js/product.js')

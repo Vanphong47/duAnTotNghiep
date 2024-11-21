@@ -1,0 +1,21 @@
+extends ../../layouts/default.pug
+
+
+
+
+block main
+    .container.bg-white(class='mx-[10px]')
+        h1(class='text-[24px] my-[8px]') Thêm mới nhóm quyền
+        form(
+            action=`/${prefixAdmin}/roles/create`
+            method='POST'
+            )
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='title') Tiêu đề
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#title(type='text', name='title', required)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='desc') Mô tả
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#desc(type='text', name='description', required)                
+            .mb-4
+                button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Tạo mới
+    script(src='/admin/js/product.js')

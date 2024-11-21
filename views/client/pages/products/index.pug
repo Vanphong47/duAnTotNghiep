@@ -1,0 +1,29 @@
+extends ../../layouts/default.pug 
+include ../../mixin/pagination.pug
+
+block main 
+  .flex(class='mt-[30px]')
+    .m-auto(class='text-[20px] font-[600]') S&#x1EA2;N PH&#x1EA8;M M&#x1EDA;I
+  .border-t.border-b(class='mt-[30px]')
+  .flex.justify-around(class='mt-[30px]')
+    each item, index in products
+      div
+        .relative
+          a(href=`/products/${item.slug}`)
+            img(src=item.thumbnail alt=item.title class='w-[250px] h-[280px] bg-[#7E7E7E]')
+          .absolute.text-white(class='top-[15px] right-[15px] bg-[#35C0BB] px-[3px] py-[2px]')
+            | -#{item.discountPercentage}%
+        .flex(class='mt-[25px]')
+          p.m-auto.align-center.opacity-70(class='text-[15px]') 
+            a(href=`/products/${item.slug}`) #{item.title}
+        .flex(class='mt-[10px]')
+          .m-auto
+            span(class='text-[#35C0BB]')
+              | #{item.priceNew}$
+            span.opacity-50.line-through #{item.price}$
+        .flex
+          button.m-auto.solid(class='mt-[10px] w-[90px] h-[32px] border-[1px] font-[600]')
+            | T&ugrave;y Ch&#x1ECD;n
+          button.m-auto.solid(class='ml-[-50px] mt-[10px] mb-[50px] w-[32px] h-[32px] border-[1px] bg-[#7E7E7E]')
+            i.fa-regular.fa-eye.text-white
+  +pagination(pagination)          
