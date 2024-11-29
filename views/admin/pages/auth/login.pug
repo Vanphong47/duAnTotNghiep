@@ -1,0 +1,26 @@
+extends ../../layouts/auth.pug
+
+block main
+  .contai
+    form(
+      action=`/${prefixAdmin}/auth/login`
+      method="POST"
+    )
+      h1 Login Form 
+      .form-control
+        input#email(type='email' name='email' placeholder='Email...' required)
+        small
+        span
+      .form-control
+        input#password(type='password' name='password' placeholder='Password...' required)
+        small
+        span
+      .form-control
+        input#confirm-password(type='password' name='confirm-password' placeholder='Confirm Password...')
+        small
+        span
+      button.btn-submit(type='submit')
+        | Login
+      .sign-up
+        | Not a member? 
+        a(href='') Sign Up

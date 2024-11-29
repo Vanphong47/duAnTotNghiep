@@ -1,5 +1,10 @@
-header.w-full.text-white(class='bg-[#3D454E] px-[25px] py-[20px]')
-  div
-    .flex.items-center(class='text-[25px]')
-      i.fa-solid.fa-house-user(class='mr-[10px]')
-      a(href=`/${prefixAdmin}/dashboard`) ADMIN 
+header.w-full.text-white(class='bg-white h-[70px] w-full border flex items-center')
+  div(class='flex items-center ml-[15px]')
+    div(class='text-[25px] text-black')
+      i.fa-solid.fa-house-user(class='mr-[5px]')
+      a(href=`/${prefixAdmin}/dashboard`) ARCHITECT 
+      i.fa-solid.fa-bars(class='ml-[45px] opacity-[0.7] text-[#3E69D5]')
+    div(class='text-black ml-[12px] h-full hover:opacity-[0.7]')
+      a(href=`/`)
+        <i class="fa-solid fa-share"></i>
+        | Trở về Website  

@@ -1,34 +1,58 @@
 header
-  .flex.justify-around.w-full(class='h-[70px] size-[10px]')
-    div 
-      <img src="/images/logo.webp" alt="logo" class="mt-[10px]">
-    .flex
-      .h-full.flex(class='border-l-[1px] border-r-[1px] border-[#EBEBEB] px-[15px]')
-        i.fa-solid.fa-phone.m-auto(class='text-[#35C0C5]')
-        span.m-auto(class='ml-[5px] hover:text-[#35C0C5]') 0000 9999 
-      .h-full.flex(class='border-r-[1px] border-[#EBEBEB]')
-        i.fa-solid.fa-magnifying-glass.m-auto(class='text-[#35C0C5] ml-[25px] hover:text-[#1B1B1B]')
-        input.m-auto.bg-transparent.outline-none(class='ml-[15px]' type='text' placeholder='Tìm kiếm...')
-      a.h-full.flex(href='' class='border-r-[1px] border-[#EBEBEB] px-[15px] transition duration-500 hover:text-white hover:bg-[#35C0C5]')
-        i.fa-regular.fa-user.m-auto(class='text-[#35C0C5] hover:text-white')
-        span.m-auto(class='ml-[8px]') &Dstrok;&abreve;ng nh&#x1EAD;p
-      a.h-full.flex(href='' class='border-r-[1px] border-[#EBEBEB] px-[15px]')
-        i.fa-regular.fa-user.m-auto(class='text-[#35C0C5]')
-        span.m-auto(class='ml-[8px]') &Dstrok;&abreve;ng k&iacute;
-      a.h-full.flex(href='' class='border-r-[1px] border-[#EBEBEB] px-[15px]')
-        i.fa-solid.fa-cart-shopping.m-auto(class='text-[#35C0C5]')
-        span.m-auto(class='ml-[8px]') Gi&#x1ECF; h&agrave;ng
-  .w-full.text-white(class='bg-[#1B1B1B] h-[40px]')
-    ul.flex.justify-center.h-full(class='text-[15px]')
-      li.flex
-        a.m-auto(href='/' class='ml-[35px] transition duration-500 hover:opacity-50') TRANG CH&#x1EE6;
-      li.flex
-        a.m-auto(href='/' class='ml-[35px] transition duration-500 hover:opacity-50') GI&#x1EDA;I THI&#x1EC6;U
-      li.flex
-        a.m-auto(href='/products' class='ml-[35px] transition duration-500 hover:opacity-50') S&#x1EA2;N PH&#x1EA8;M
-      li.flex
-        a.m-auto(href='/' class='ml-[35px] transition duration-500 hover:opacity-50') TIN T&#x1EE8;C
-      li.flex
-        a.m-auto(href='/' class='ml-[35px] transition duration-500 hover:opacity-50') B&#x1EA2;N &Dstrok;&#x1ED2;
-      li.flex
-        a.m-auto(href='/' class='ml-[35px] transition duration-500 hover:opacity-50') LI&Ecirc;N H&#x1EC6;
+  .w-full.h-auto.border
+    .flex.justify-around(class='py-[18px] relative')
+      div(class='text-[22px] font-[600]') 8 (844) 880 - 33388
+      div
+        a(href='')
+          img(src='https://demo2.wpopal.com/shopio/wp-content/uploads/2021/12/logo.svg' alt='Shopio')
+      div(class='text-[22px]')
+        i.fa-solid.fa-magnifying-glass(
+          id='search'
+          class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer open-search'
+        )
+        i.fa-regular.fa-heart(class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+        i.fa-regular.fa-user(class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+        i.fa-solid.fa-cart-shopping(class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+
+
+      .w-full.border.flex.justify-center(
+        id='search-header'
+        class='py-[30px] bg-[#DCDCDC] open-search-header absolute top-[0px] z-[999] hidden'
+        )
+        .relative
+          input(class='p-[12px] w-[600px] rounded-[8px] outline-none' type='text' placeholder='Nhập vào đây...........')
+          i.fa-solid.fa-magnifying-glass.absolute(class='top-[15px] right-[12px]')
+        .flex.relative(class='w-[18px] h-[18px] top-[-24px] right-[-20%] hover:text-[#E8C592] hover:cursor-pointer')
+          i.fa-solid.fa-xmark.m-auto
+
+
+
+    .border-t.h-auto(class='py-[18px]')
+      .flex.justify-center.items-center
+        ul.flex.flex-row.justify-between(class='font-[600]')
+          a(href='/')
+            li.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+              | Trang chủ
+          a(href='/intro')
+            li.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+              | Giới Thiệu
+          a(href='/products')
+            li.flex.justify-center.align-center.relative.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+              | Trang sức
+              i.fa-solid.fa-sort-down(class='ml-[5px]')
+              .absolute.text-white(class='text-[10px] px-[5px] rounded-[20px] top-[-25px] left-[2px] bg-[#F89619]')
+                | Bộ sưu tập
+          a(href='/article')
+            li.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+              | Bài viết
+          a(href='/')
+            li.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+              | Thông tin
+          a(href='/')
+            li.relative.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+              | Sản phẩm hot
+              .absolute.text-white(class='text-[10px] px-[5px] rounded-[20px] top-[-25px] left-[15px] bg-[#E56D6D]')
+                | Hot
+          a(href='/')
+            li.transition(class='ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+              | Liên hệ                

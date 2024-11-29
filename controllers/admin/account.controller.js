@@ -53,39 +53,39 @@ module.exports.createPost = async (req, res) => {
   res.redirect(`/${system.prefixAdmin}/accounts`);
 };
 //[GET] /admin/account/edit/:id
-// module.exports.edit = async (req, res) => {
-//   try {
-//     const data = await Account.findOne({
-//       _id: req.params.id,
-//       deleted: false,
-//     });
-//     const roles = await Role.find({
-//       deleted: false,
-//     });
-//     res.render("admin/pages/accounts/edit.pug", {
-//       pageTitle: "Chỉnh sửa tài khoản",
-//       data: data,
-//       roles: roles,
-//     });
-//   } catch (error) {
-//     res.redirect(`/${systemConfig.prefixAdmin}/accounts`);
-//   }
-// };
+module.exports.edit = async (req, res) => {
+  try {
+    const data = await Account.findOne({
+      _id: req.params.id,
+      deleted: false,
+    });
+    const roles = await Role.find({
+      deleted: false,
+    });
+    res.render("admin/pages/accounts/edit.pug", {
+      pageTitle: "Chỉnh sửa tài khoản",
+      data: data,
+      roles: roles,
+    });
+  } catch (error) {
+    res.redirect(`/${system.prefixAdmin}/accounts`);
+  }
+};
 //[PATCH] /admin/account/edit/:id
-// module.exports.editPatch = async (req, res) => {
-//   const id = req.params.id;
-//   if (req.body.password) {
-//     req.body.password = md5(req.body.password);
-//   } else {
-//     delete req.body.password;
-//   }
-//   await Account.updateOne(
-//     {
-//       _id: id,
-//       deleted: false,
-//     },
-//     req.body
-//   );
-//   req.flash("success", "Cập nhật tài khoản thành công!");
-//   res.redirect("back");
-// };
+module.exports.editPatch = async (req, res) => {
+  const id = req.params.id;
+  if (req.body.password) {
+    req.body.password = md5(req.body.password);
+  } else {
+    delete req.body.password;
+  }
+  await Account.updateOne(
+    {
+      _id: id,
+      deleted: false,
+    },
+    req.body
+  );
+  req.flash("success", "Cập nhật tài khoản thành công!");
+  res.redirect(`/${system.prefixAdmin}/accounts`);
+};

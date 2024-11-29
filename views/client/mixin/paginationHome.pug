@@ -1,0 +1,17 @@
+mixin pagination(pagination)
+  nav(class=" flex justify-center items-center")
+    ul.flex(class='m-[25px]')
+        li(class='ml-[8px]')
+        button(
+            class='text-[#D5D5D5] hover:text-[#F89619]'
+            button-pagination = 1
+            )
+            <i class="fa-solid fa-arrow-left mr-[5px]"></i>
+            | Next
+        li(class='ml-[8px]')
+        button(
+            class='text-[#D5D5D5] hover:text-[#F89619]'
+            button-pagination = pagination.sumPage
+            )
+            | End 
+            <i class="fa-solid fa-arrow-right ml-[5px]"></i>

@@ -1,10 +1,11 @@
 mixin search(keyword)
-    form(action='' id='form-search')
+    form(action='' id='form-search' class='relative')
         input.outline-none.flex-1(
             type='text' 
             placeholder='Nhập từ khóa...' 
             name='keyword' 
-            class='p-[10px] border-[1px]'
+            class='p-[6px] border-[1px] rounded-[8px]'
             value=keyword
             )
-        button(class='p-[10px] border-[1px] hover:bg-[#1876D2] hover:text-white' type='submit') Tìm 
+        button(class=' hover:text-[#1876D2] absolute right-[12px] top-[12px]' type='submit') 
+          <i class="fa-solid fa-magnifying-glass"></i>

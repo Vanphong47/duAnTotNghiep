@@ -8,7 +8,7 @@ module.exports.index = async (req, res) => {
     deleted: false,
   };
   const countProduct = await Product.countDocuments(find); // Đếm bản ghi
-  const objectPagination = paginationHelper(4, req.query, countProduct);
+  const objectPagination = paginationHelper(8, req.query, countProduct);
   // Hết phân trang
   const products = await Product.find({
     status: "active",
@@ -37,6 +37,10 @@ module.exports.detail = async (req, res) => {
       deleted: false,
       status: "active",
     });
+    const products = await Product.find({
+      status: "active",
+      deleted: false,
+    });
     // product.priceNew = product.price * (1 - product.discountPercentage/100)
     // product.priceNew = product.priceNew.toFixed(0);
     // if(product.product_category_id){
@@ -49,6 +53,7 @@ module.exports.detail = async (req, res) => {
     res.render("client/pages/products/detail", {
       pageTitle: product.title,
       product: product,
+      products: products,
     });
   } catch (error) {
     res.redirect("/");

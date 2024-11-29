@@ -3,34 +3,34 @@ mixin pagination(pagination)
     ul.flex(class='m-[25px]')
         li(class='ml-[8px]')
         button(
-            class='p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white'
+            class='p-[8px] border rounded-[3px] hover:bg-[#1876D2] hover:text-white'
             button-pagination = 1
             )
-            | Đầu trang
+            | Next
         if(pagination.currentPage > 1)         
             li(class='ml-[8px]')
             button(
-                class='p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white'
+                class='p-[8px] border rounded-[3px] hover:bg-[#1876D2] hover:text-white'
                 button-pagination = pagination.currentPage-1
                 )
                 i.fa-solid.fa-backward
         - for(var i = 1; i <= pagination.sumPage; i ++)    
             li(class='ml-[8px]' )
             button(
-                class=`p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white ${pagination.currentPage == i ? " bg-[#1876D2] text-white" : ""}`
+                class=`p-[8px] border rounded-[3px] hover:bg-[#1876D2] hover:text-white ${pagination.currentPage == i ? " bg-[#1876D2] text-white" : ""}`
                 button-pagination = i
                 )
                 | #{i}
         if(pagination.currentPage < pagination.sumPage)              
             li(class='ml-[8px]')
             button(
-                class='p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white'
+                class='p-[8px] border rounded-[3px] hover:bg-[#1876D2] hover:text-white'
                 button-pagination = pagination.currentPage+1
                 )
                 i.fa-solid.fa-forward 
         li(class='ml-[8px]')
         button(
-            class='p-[8px] border-[1px] hover:bg-[#1876D2] hover:text-white'
+            class='p-[8px] border rounded-[3px] hover:bg-[#1876D2] hover:text-white'
             button-pagination = pagination.sumPage
             )
-            | Cuối trang 
+            | End 

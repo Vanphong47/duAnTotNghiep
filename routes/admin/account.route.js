@@ -25,12 +25,11 @@ router.get("/create", accountsController.create);
 
 router.post("/create", upload.single("avatar"), accountsController.createPost);
 
-// router.get("/edit/:id", accountsController.edit);
+router.get("/edit/:id", accountsController.edit);
 
-// router.patch(
-//   "/edit/:id",
-//   upload.single("avatar"),
-//   uploadCloud.uploadSingle,
-//   accountsController.editPatch
-// );
+router.patch(
+  "/edit/:id",
+  upload.single("avatar"),
+  accountsController.editPatch
+);
 module.exports = router;
