@@ -26,10 +26,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(methodOverride("_method")); // de ghi de duoc phuong thuc trong the form
 
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
-app.use(express.static("public")); // nhúng file tĩnh
+app.use(express.static(`${__dirname}/public`)); // nhúng file tĩnh
 
 /* New Route to the TinyMCE Node module */
 app.use(
