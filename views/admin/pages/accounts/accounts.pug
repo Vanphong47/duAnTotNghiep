@@ -47,9 +47,11 @@ block main
                         button-change-status
                     ) Dừng hoạt động    
             td.border.border-gray-300.px-10.py-2(class='hover:bg-gray-200')
+                a(href=`/${prefixAdmin}/accounts/detail/${item.id}`)
+                    button.bg-gray-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-solid fa-file-pen"></i>            
                 a(href=`/${prefixAdmin}/accounts/edit/${item.id}`)
-                    button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') Sửa
-                button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) Xóa 
+                    button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-regular fa-pen-to-square"></i>
+                button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) <i class="fa-regular fa-trash-can"></i>
   
   form(
     form-change-status 
@@ -57,6 +59,7 @@ block main
     method="POST"
     data-path=`/${prefixAdmin}/accounts/change-status`
   )
+
   form(
     form-delete-item 
     action=""

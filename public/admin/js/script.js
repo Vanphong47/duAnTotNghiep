@@ -145,6 +145,7 @@ if (formChangeMulti) {
 
 // Delete item
 const buttonDelete = document.querySelectorAll("[button-delete]");
+console.log(buttonDelete);
 if (buttonDelete.length > 0) {
   const deleteItem = document.querySelector("[form-delete-item]");
   const path = deleteItem.getAttribute("data-path");

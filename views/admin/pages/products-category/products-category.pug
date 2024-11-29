@@ -1,17 +1,53 @@
 extends ../../layouts/default.pug
 include ../../mixin/alert.pug
 include ../../mixin/pagination.pug
+include ../../mixin/search.pug
+include ../../mixin/form-change-multi.pug
+include ../../mixin/sort.pug
+include ../../mixin/filterState.pug
 
 block main
-  h1(class='text-[24px] px-[30px] py-[25px] h-[80px] bg-gray-200 my-[12px] ml-[10px] font-[500]') #{pageTitle}
-  div(class="border rounded-[3px] ml-[10px]")
-    div(class="bg-[#D5D5D5] p-[10px]")
-      span Danh Sách
-    div(class="p-[8px] flex justify-end")
-      button(class='border hover:bg-[#1876D2] rounded-[8px] p-[5px]')
-        a(
-            href=`/${prefixAdmin}/products-category/create`
-        ) + Thêm mới
+
+  +alert-success(5000)
+  div(class='border mx-[8px] bg-[]')
+    div(class='ml-[8px] text-[24px] font-bold my-[12px]') #{pageTitle}
+
+    div(class='flex items-center justify-between mb-[12px] mx-[8px]')
+        div(class='flex')            
+            +filterState(filterState)
+            +form-change-multi(`/${prefixAdmin}/products-category/change-multi?_method=PATCH`)
+            +sort([
+                {
+                    lable: "Vị trí giảm dần",
+                    value: "position-desc"
+                },
+                {
+                    lable: "Vị trí tăng dần",
+                    value: "position-asc"
+                },
+                {
+                    lable: "Giá giảm dần",
+                    value: "price-desc"
+                },
+                {
+                    lable: "Giá tăng dần",
+                    value: "price-asc"
+                },
+                {
+                    lable: "Tiêu đề A - Z",
+                    value: "title-desc"
+                },
+                {
+                    lable: "Tiêu đề Z - A",
+                    value: "title-asc"
+                },
+            ])
+        div(class='flex')
+            +search(keyword)
+            button(class='w-[100px] h-[38px] bg-white border hover:bg-[#1876D2] rounded-[8px]')
+                a(
+                    href=`/${prefixAdmin}/products-category/create`
+                ) + Thêm mới
   table.border-collapse.border.border-gray-300(class='ml-[10px] my-[10px] w-[75%]' checkbox-multi)
     thead
         tr.bg-gray-200

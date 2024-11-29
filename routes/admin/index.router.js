@@ -6,12 +6,22 @@ const accountsRouter = require("./account.route");
 const authRouter = require("./auth.router");
 const systemConfig = require("../../config/system");
 
+const authMiddleware = require("../../middlewares/admin/auth.middleware"); // middleware cho các trang link tới đăng nhập
+
 module.exports = (app) => {
   const PATH_ADMIN = `/${systemConfig.prefixAdmin}`;
-  app.use(`${PATH_ADMIN}/dashboard`, dashboardRouter);
-  app.use(`${PATH_ADMIN}/products`, productsRouter);
-  app.use(`${PATH_ADMIN}/products-category`, productsCategoryRouter);
-  app.use(`${PATH_ADMIN}/roles`, rolesRouter);
-  app.use(`${PATH_ADMIN}/accounts`, accountsRouter);
+  app.use(
+    `${PATH_ADMIN}/dashboard`,
+    authMiddleware.requireAuth,
+    dashboardRouter
+  );
+  app.use(`${PATH_ADMIN}/products`, authMiddleware.requireAuth, productsRouter);
+  app.use(
+    `${PATH_ADMIN}/products-category`,
+    authMiddleware.requireAuth,
+    productsCategoryRouter
+  );
+  app.use(`${PATH_ADMIN}/roles`, authMiddleware.requireAuth, rolesRouter);
+  app.use(`${PATH_ADMIN}/accounts`, authMiddleware.requireAuth, accountsRouter);
   app.use(`${PATH_ADMIN}/auth`, authRouter);
 };

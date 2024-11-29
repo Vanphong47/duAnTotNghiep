@@ -9,9 +9,7 @@ include ../../mixin/sort.pug
 block main
   +alert-success(5000)
   div(class='border mx-[8px] bg-[]')
-    div(class='ml-[8px] text-[24px] font-bold my-[12px]')
-      | Danh sách sản phẩm
-
+    div(class='ml-[8px] text-[24px] font-bold my-[12px]') #{pageTitle}
     div(class='flex items-center justify-between mb-[12px] mx-[8px]')
         div(class='flex')            
             +filterState(filterState)

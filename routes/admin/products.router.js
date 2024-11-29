@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 
-const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js");
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js"); //upload cloud ảnh
 
 // const storageMulter = require("../../helpers/storage.helper");
 // Hàm xử lí lưu ảnh vào public
@@ -19,6 +19,7 @@ const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js")
 //Hết hàm xử lí lưu ảnh vào public
 // const upload = multer({ storage: storage });
 const upload = multer();
+
 const controller = require("../../controllers/admin/products.controller");
 
 const validate = require("../../validates/admin/produc.validate");

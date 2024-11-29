@@ -3,7 +3,7 @@ const Account = require("../../model/account.model");
 const Role = require("../../model/role.model");
 const system = require("../../config/system");
 const generateHelpers = require("../../helpers/generate.helper"); // hàm tạo 30 kí tự ngẫu nhiên
-const { response } = require("express");
+
 //[GET] /admin/account/
 module.exports.index = async (req, res) => {
   let find = {
@@ -52,6 +52,21 @@ module.exports.createPost = async (req, res) => {
   await record.save();
   res.redirect(`/${system.prefixAdmin}/accounts`);
 };
+//[PATCH] /admin/account/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+  const status = req.params.status;
+  const id = req.params.id;
+  await Account.updateOne(
+    {
+      _id: id,
+    },
+    {
+      status: status,
+    }
+  );
+  req.flash("success", "Cập nhật trạng thái thành công!");
+  res.redirect("back"); // tro ve trang truoc
+};
 //[GET] /admin/account/edit/:id
 module.exports.edit = async (req, res) => {
   try {
@@ -88,4 +103,23 @@ module.exports.editPatch = async (req, res) => {
   );
   req.flash("success", "Cập nhật tài khoản thành công!");
   res.redirect(`/${system.prefixAdmin}/accounts`);
+};
+
+//[DELETE] /admin/account/delete/:id
+module.exports.deleteItem = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Account.updateOne(
+      {
+        _id: id,
+      },
+      {
+        deleted: true,
+        deletedAt: new Date(),
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  res.redirect("back");
 };

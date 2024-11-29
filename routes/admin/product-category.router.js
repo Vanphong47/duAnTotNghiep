@@ -3,28 +3,17 @@ const router = express.Router();
 const multer = require("multer");
 const validate = require("../../validates/admin/product-category.validate");
 
-// Hàm xử lí lưu ảnh vào public
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./public/uploads");
-  },
-  filename: function (req, file, cb) {
-    const prefix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, prefix + "-" + file.originalname);
-  },
-});
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware.js"); //upload cloud ảnh
 
-//Hết hàm xử lí lưu ảnh vào public
-const upload = multer({ storage: storage });
+const upload = multer();
 const controller = require("../../controllers/admin/product-category.controller");
 
 router.get("/", controller.index);
-
-router.get("/create", controller.create);
-
 router.patch("/change-status/:status/:id", controller.changeStatus);
 router.delete("/delete/:id", controller.deleteItem);
+router.patch("/change-multi", controller.changeMulti);
 
+router.get("/create", controller.create);
 router.post(
   "/create",
   upload.single("thumbnail"),
@@ -33,10 +22,10 @@ router.post(
 );
 
 router.get("/edit/:id", controller.edit);
-
 router.patch(
   "/edit/:id",
   upload.single("thumbnail"),
+  uploadCloud.uploadSingle,
   validate.createPost,
   controller.editPatch
 );

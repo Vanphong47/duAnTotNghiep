@@ -1,10 +1,16 @@
 header.w-full.text-white(class='bg-white h-[70px] w-full border flex items-center')
-  div(class='flex items-center ml-[15px]')
-    div(class='text-[25px] text-black')
-      i.fa-solid.fa-house-user(class='mr-[5px]')
-      a(href=`/${prefixAdmin}/dashboard`) ARCHITECT 
-      i.fa-solid.fa-bars(class='ml-[45px] opacity-[0.7] text-[#3E69D5]')
-    div(class='text-black ml-[12px] h-full hover:opacity-[0.7]')
-      a(href=`/`)
-        <i class="fa-solid fa-share"></i>
-        | Trở về Website  
+  div(class='flex items-center ml-[15px] justify-between')
+    div.flex
+      div(class='text-[25px] text-black')
+        i.fa-solid.fa-house-user(class='mr-[5px]')
+        a(href=`/${prefixAdmin}/dashboard`) ARCHITECT 
+        i.fa-solid.fa-bars(class='ml-[45px] opacity-[0.7] text-[#3E69D5]')
+      div(class='text-black ml-[12px] h-full hover:opacity-[0.7]')
+        a(href=`/`)
+          <i class="fa-solid fa-share"></i>
+          | Trở về Website
+        a(href=`/${prefixAdmin}/auth/logout`)
+          <i class="fa-solid fa-share"></i>
+          | Đăng xuất 
+
+    
