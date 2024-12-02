@@ -105,7 +105,7 @@ module.exports.editPatch = async (req, res) => {
   res.redirect(`/${system.prefixAdmin}/accounts`);
 };
 
-//[DELETE] /admin/account/delete/:id
+//[DELETE] /admin/acount/delete/:id
 module.exports.deleteItem = async (req, res) => {
   try {
     const id = req.params.id;

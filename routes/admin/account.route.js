@@ -19,9 +19,9 @@ router.post(
   accountsController.createPost
 );
 
-router.delete("/delete/:id", accountsController.deleteItem);
-
 router.get("/edit/:id", accountsController.edit);
+
+router.delete("/delete/:id", accountsController.deleteItem);
 
 router.patch("/change-status/:status/:id", accountsController.changeStatus);
 

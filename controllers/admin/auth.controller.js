@@ -21,6 +21,7 @@ module.exports.loginPost = async (req, res) => {
 
   if (!user) {
     req.flash("error", "Email không tồn tại!");
+    // res.location(req.get("Referrer") || "/");
     res.redirect("back");
     return;
   }
@@ -33,6 +34,7 @@ module.exports.loginPost = async (req, res) => {
 
   if (user.status != "active") {
     req.flash("error", "Tài khoản đang bị khóa!");
+    // res.location(req.get("Referrer") || "/");
     res.redirect("back");
     return;
   }
