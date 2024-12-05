@@ -5,51 +5,54 @@ include ../../mixin/pagination.pug
 include ../../mixin/form-change-multi.pug
 include ../../mixin/alert.pug
 include ../../mixin/sort.pug
+include ../../mixin/moment.pug
 
 block main
-  +alert-success(5000)
-  div(class='border mx-[8px] bg-[]')
-    div(class='ml-[8px] text-[24px] font-bold my-[12px]') #{pageTitle}
-    div(class='flex items-center justify-between mb-[12px] mx-[8px]')
-        div(class='flex')            
-            +filterState(filterState)
-            +form-change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
-            +sort([
-                {
-                    lable: "Vị trí giảm dần",
-                    value: "position-desc"
-                },
-                {
-                    lable: "Vị trí tăng dần",
-                    value: "position-asc"
-                },
-                {
-                    lable: "Giá giảm dần",
-                    value: "price-desc"
-                },
-                {
-                    lable: "Giá tăng dần",
-                    value: "price-asc"
-                },
-                {
-                    lable: "Tiêu đề A - Z",
-                    value: "title-desc"
-                },
-                {
-                    lable: "Tiêu đề Z - A",
-                    value: "title-asc"
-                },
-            ])
-        div(class='flex')
-            +search(keyword)
-            button(class='w-[100px] h-[38px] bg-white border hover:bg-[#1876D2] rounded-[8px]')
-                a(
-                    href=`/${prefixAdmin}/products/create`
-                ) + Thêm mới
+  if(role.permissions.includes("products_view"))
+    +alert-success(5000)
+    div(class='border mx-[8px] bg-[]')
+        div(class='ml-[8px] text-[24px] font-bold my-[12px]') #{pageTitle}
+        div(class='flex items-center justify-between mb-[12px] mx-[8px]')
+            div(class='flex')            
+                +filterState(filterState)
+                +form-change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
+                +sort([
+                    {
+                        lable: "Vị trí giảm dần",
+                        value: "position-desc"
+                    },
+                    {
+                        lable: "Vị trí tăng dần",
+                        value: "position-asc"
+                    },
+                    {
+                        lable: "Giá giảm dần",
+                        value: "price-desc"
+                    },
+                    {
+                        lable: "Giá tăng dần",
+                        value: "price-asc"
+                    },
+                    {
+                        lable: "Tiêu đề A - Z",
+                        value: "title-desc"
+                    },
+                    {
+                        lable: "Tiêu đề Z - A",
+                        value: "title-asc"
+                    },
+                ])
+            div(class='flex')
+                +search(keyword)
+                if(role.permissions.includes("products_create"))
+                  button(class='w-[100px] h-[38px] bg-white border hover:bg-[#1876D2] rounded-[8px]')
+                    a(
+                        href=`/${prefixAdmin}/products/create`
+                    ) + Thêm mới
 
 
-  table.border.border-gray-300(class='mx-[8px] my-[10px] w-full' checkbox-multi)
-    thead
+    table.border.border-gray-300(class='mx-[8px] my-[10px] w-full' checkbox-multi)
+      thead
         tr.bg-gray-200
             th.border.border-gray-300.px-2.py-2.text-left
                 input(
@@ -62,6 +65,7 @@ block main
             th.border.border-gray-300.px-1.py-2.text-left Sl trong kho
             th.border.border-gray-300.px-4.py-2.text-left Đơn giá
             th.border.border-gray-300.px-2.py-2.text-left Vị trí
+            th.border.border-gray-300.px-4.py-2.text-left Tạo bởi
             th.border.border-gray-300.px-4.py-2.text-left Trạng Thái
             th.border.border-gray-300.px-4.py-2.text-left Chức năng
         each item, index in products    
@@ -87,7 +91,14 @@ block main
                     value=item.position
                     class='border text-center'
                   )
+                td.border.border-gray-300.py-4(class=' pl-4')
+                  p #{item.createdBy.fullName}
+                  if(item.createdBy.createdAt)
+                    //- p #{moment(item.createdBy.createdAt).format("DD/MM/YY HH:mm:ss")}
+                    +formatDate(item.createdBy.createdAt)
+                    +formatTime(item.createdBy.createdAt)
                 td.border.border-gray-300.px-5.py-2(class='')
+                  if(role.permissions.includes("products_edit"))
                     if(item.status == 'active')
                         a(
                             href='javascript:;' 
@@ -107,22 +118,24 @@ block main
                 td.border.border-gray-300.px-10.py-2(class='')
                     a(href=`/${prefixAdmin}/products/detail/${item.id}`)
                         button.bg-gray-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-solid fa-file-pen"></i>
-                    a(href=`/${prefixAdmin}/products/edit/${item.id}`)
+                    if(role.permissions.includes("products_edit"))
+                      a(href=`/${prefixAdmin}/products/edit/${item.id}`)
                         button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-regular fa-pen-to-square"></i>
-                    button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) <i class="fa-regular fa-trash-can"></i>                    
-  +pagination(pagination)
+                    if(role.permissions.includes("products_delete"))
+                      button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) <i class="fa-regular fa-trash-can"></i>                    
+    +pagination(pagination)
 
-  form(
-    form-change-status 
-    action=""
-    method="POST"
-    data-path=`/${prefixAdmin}/products/change-status`
-  )
+    form(
+        form-change-status 
+        action=""
+        method="POST"
+        data-path=`/${prefixAdmin}/products/change-status`
+    )
 
-  form(
-    form-delete-item 
-    action=""
-    method="POST"
-    data-path=`/${prefixAdmin}/products/delete`
-  )  
+    form(
+        form-delete-item 
+        action=""
+        method="POST"
+        data-path=`/${prefixAdmin}/products/delete`
+    )  
                      

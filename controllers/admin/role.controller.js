@@ -75,6 +75,7 @@ module.exports.permissions = async (req, res) => {
 //[PATCJ] /admin/roles/permissions
 module.exports.permissionsPatch = async (req, res) => {
   const roles = JSON.parse(req.body.roles);
+  console.log(req.body.roles);
   try {
     for (const item of roles) {
       await Role.updateOne(

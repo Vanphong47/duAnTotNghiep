@@ -146,7 +146,30 @@ block main
             td(class="border border-gray-300 pl-[8px]") Xóa  
             each item in records  
               td(class="text-center px-[3px] py-[4px] border border-gray-300")  
-                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")     
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")   
+
+          //- Thùng rác  
+          tr  
+            td(colspan="4" class="font-bold px-[3px] py-[4px]")  
+              b Thùng rác  
+          tr(data-name="trash_view" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xem  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")   
+
+          tr(data-name="trash_undo" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Hoàn tác  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="trash_delete" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xóa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")    
+
       form(  
         form-change-permissions  
         method="POST"  

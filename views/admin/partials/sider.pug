@@ -1,40 +1,57 @@
 sider(class='w-[250px] bg-[#F1F4F6] h-[1080px]')
   ul(class='px-[10px]')
     li(class='pt-[15px] font-bold text-[#3E69D5] text-[16px] ml-[8px]')
-      | MENU
+      | DANH SÁCH
     li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
       i.fa-solid.fa-rocket(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/dashboard` class="text-[12px] ml-[5px]") Dashboards
+      a(href=`/${prefixAdmin}/dashboard` class="text-[12px] ml-[5px]") Trang Tổng Quan
+    if(role.permissions.includes("products-category_view"))    
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-list(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/products-category` class="text-[12px]") Danh Mục Sản Phẩm
+    if(role.permissions.includes("products_view"))
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-cart-shopping(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/products` class="text-[12px]") Danh Sách Sản Phẩm
     li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-cart-shopping(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/products` class="text-[12px]") Trang Sản Phẩm
-    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-list(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/products-category` class="text-[12px]") Danh Mục Sản Phẩm
-    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-user(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/accounts` class="text-[12px]") Danh sách tài khoản               
+      i.fa-regular.fa-newspaper(class='mr-[8px] opacity-[0.7]')
+      a(href=`/${prefixAdmin}/article` class="text-[12px]") Danh Sách Bài Viết             
+    li(class='pt-[15px] font-bold mt-[15px] text-[#3E69D5] ml-[8px]')
+      | VAI TRÒ
+    if(role.permissions.includes("roles_view"))  
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-users(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/roles` class="text-[12px]") Nhóm quyền
+    if(role.permissions.includes("roles_permissions"))    
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-users-rays(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/roles/permissions` class="text-[12px]") Phân quyền
+    if(role.permissions.includes("account_view"))    
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-user(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/accounts` class="text-[12px]") Danh sách tài khoản           
 
     li(class='pt-[15px] font-bold mt-[15px] text-[#3E69D5] ml-[8px]')
-      | ROLES
-    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-users(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/roles` class="text-[12px]") Nhóm quyền
-    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-users-rays(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/roles/permissions` class="text-[12px]") Phân quyền          
-
+      | THÊM MỚI
+    if(role.permissions.includes("products_view"))  
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-cart-plus(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/products/create` class="text-[12px]") Thêm mới sản phẩm
+    if(role.permissions.includes("products-category_view"))
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-table-list(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/products-category/create` class="text-[12px]") Thêm mới danh mục 
+    if(role.permissions.includes("roles_view"))
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-users-line(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/roles/create` class="text-[12px]") Thêm mới nhóm quyền
+    if(role.permissions.includes("account_view"))
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-solid.fa-user-plus(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/accounts/create` class="text-[12px]") Thêm mới tài khoản  
     li(class='pt-[15px] font-bold mt-[15px] text-[#3E69D5] ml-[8px]')
-      | ADD NEW
-    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-cart-plus(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/products/create` class="text-[12px]") Thêm mới sản phẩm
-    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-table-list(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/products-category/create` class="text-[12px]") Thêm mới danh mục 
-    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-users-line(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/roles/create` class="text-[12px]") Thêm mới nhóm quyền
-    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
-      i.fa-solid.fa-user-plus(class='mr-[8px] opacity-[0.7]')
-      a(href=`/${prefixAdmin}/accounts/create` class="text-[12px]") Thêm mới tài khoản                             
+      | THÙNG RÁC  
+    if(role.permissions.includes("trash_view"))
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        i.fa-regular.fa-trash-can(class='mr-[8px] opacity-[0.7]')
+        a(href=`/${prefixAdmin}/trashbin` class="text-[12px]") Thùng rác                         

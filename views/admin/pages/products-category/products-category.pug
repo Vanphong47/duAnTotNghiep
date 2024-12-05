@@ -7,49 +7,42 @@ include ../../mixin/sort.pug
 include ../../mixin/filterState.pug
 
 block main
+  if(role.permissions.includes("products-category_view"))
+    +alert-success(5000)
+    div(class='border mx-[8px] bg-[]')
+        div(class='ml-[8px] text-[24px] font-bold my-[12px]') #{pageTitle}
 
-  +alert-success(5000)
-  div(class='border mx-[8px] bg-[]')
-    div(class='ml-[8px] text-[24px] font-bold my-[12px]') #{pageTitle}
-
-    div(class='flex items-center justify-between mb-[12px] mx-[8px]')
-        div(class='flex')            
-            +filterState(filterState)
-            +form-change-multi(`/${prefixAdmin}/products-category/change-multi?_method=PATCH`)
-            +sort([
-                {
-                    lable: "Vị trí giảm dần",
-                    value: "position-desc"
-                },
-                {
-                    lable: "Vị trí tăng dần",
-                    value: "position-asc"
-                },
-                {
-                    lable: "Giá giảm dần",
-                    value: "price-desc"
-                },
-                {
-                    lable: "Giá tăng dần",
-                    value: "price-asc"
-                },
-                {
-                    lable: "Tiêu đề A - Z",
-                    value: "title-desc"
-                },
-                {
-                    lable: "Tiêu đề Z - A",
-                    value: "title-asc"
-                },
-            ])
-        div(class='flex')
-            +search(keyword)
-            button(class='w-[100px] h-[38px] bg-white border hover:bg-[#1876D2] rounded-[8px]')
-                a(
-                    href=`/${prefixAdmin}/products-category/create`
-                ) + Thêm mới
-  table.border-collapse.border.border-gray-300(class='ml-[10px] my-[10px] w-[75%]' checkbox-multi)
-    thead
+        div(class='flex items-center justify-between mb-[12px] mx-[8px]')
+            div(class='flex')            
+                +filterState(filterState)
+                +form-change-multi(`/${prefixAdmin}/products-category/change-multi?_method=PATCH`)
+                +sort([
+                    {
+                        lable: "Vị trí giảm dần",
+                        value: "position-desc"
+                    },
+                    {
+                        lable: "Vị trí tăng dần",
+                        value: "position-asc"
+                    },
+                    {
+                        lable: "Tiêu đề A - Z",
+                        value: "title-desc"
+                    },
+                    {
+                        lable: "Tiêu đề Z - A",
+                        value: "title-asc"
+                    },
+                ])
+            div(class='flex')
+                +search(keyword)
+                if(role.permissions.includes("products-category_create"))
+                  button(class='w-[100px] h-[38px] bg-white border hover:bg-[#1876D2] rounded-[8px]')
+                    a(
+                        href=`/${prefixAdmin}/products-category/create`
+                    ) + Thêm mới
+    table.border-collapse.border.border-gray-300(class='ml-[10px] my-[10px] w-[75%]' checkbox-multi)
+      thead
         tr.bg-gray-200
             th.border.border-gray-300.px-2.py-2.text-left
                 input(
@@ -84,6 +77,7 @@ block main
                     class='border text-center'
                   )
                 td.border.border-gray-300.px-5.py-2(class='hover:bg-gray-200')
+                  if(role.permissions.includes("products-category_edit"))
                     if(item.status == 'active')
                         a(
                             href='javascript:;' 
@@ -101,19 +95,21 @@ block main
                             button-change-status
                         ) Dừng hoạt động    
                 td.border.border-gray-300.px-10.py-2(class='hover:bg-gray-200')
+                  if(role.permissions.includes("products-category_edit"))
                     a(href=`/${prefixAdmin}/products-category/edit/${item.id}`)
-                        button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') Sửa
-                    button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) Xóa 
-  +pagination(pagination)
-  form(
-    form-change-status 
-    action=""
-    method="POST"
-    data-path=`/${prefixAdmin}/products-category/change-status`
-  )
-  form(
-    form-delete-item 
-    action=""
-    method="POST"
-    data-path=`/${prefixAdmin}/products-category/delete`
-  )                            
+                        button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-regular fa-pen-to-square"></i>
+                  if(role.permissions.includes("products-category_delete"))
+                    button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) <i class="fa-regular fa-trash-can"></i>
+    +pagination(pagination)
+    form(
+        form-change-status 
+        action=""
+        method="POST"
+        data-path=`/${prefixAdmin}/products-category/change-status`
+    )
+    form(
+        form-delete-item 
+        action=""
+        method="POST"
+        data-path=`/${prefixAdmin}/products-category/delete`
+    )                            

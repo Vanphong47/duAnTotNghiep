@@ -69,19 +69,23 @@ module.exports.create = async (req, res) => {
 
 //[POST] /admin/products-category/create
 module.exports.createPost = async (req, res) => {
-  if (req.body.position == "") {
-    const countRecords = await ProductCategory.countDocuments();
-    req.body.position = countRecords + 1;
+  if (res.locals.role.permissions.includes("products-category_create")) {
+    if (req.body.position == "") {
+      const countRecords = await ProductCategory.countDocuments();
+      req.body.position = countRecords + 1;
+    } else {
+      req.body.position = parseInt(req.body.position);
+    }
+    if (req.file && req.file.filename) {
+      req.body.thumbnail = `/uploads/${req.file.filename}`; // lưu tên file ảnh vào data
+    }
+    const records = new ProductCategory(req.body);
+    await records.save(); // dòng code để update
+    req.flash("success", "Thêm mới danh mục sản phẩm thành công!");
+    res.redirect(`/${system.prefixAdmin}/products-category`);
   } else {
-    req.body.position = parseInt(req.body.position);
+    res.send("403");
   }
-  if (req.file && req.file.filename) {
-    req.body.thumbnail = `/uploads/${req.file.filename}`; // lưu tên file ảnh vào data
-  }
-  const records = new ProductCategory(req.body);
-  await records.save(); // dòng code để update
-  req.flash("success", "Thêm mới danh mục sản phẩm thành công!");
-  res.redirect(`/${system.prefixAdmin}/products-category`);
 };
 
 //[PATCH] /admin/products-category/change-status/:status/:id

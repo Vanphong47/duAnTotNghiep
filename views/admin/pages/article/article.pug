@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug
+block main
+  h1(class='mt-[18px] ml-[8px] text-[24px] font-[600]') #{pageTitle} 
+  div(class='mt-[15px] ml-[8px] px-[8px] py-[8px] border rounded-[5px] flex items-center justify-center hover:bg-[#1876D2] w-[90px] border-[#1876D2]')
+    span(class='text-[13px] text-[#1876D2] hover:text-white cursor-pointer font-[500]') + Thêm mới
+ 
+  div(class='mt-[30px] h-auto w-full mx-[8px] flex justify-between bg-[#F8F8F8] py-[12px] px-[24px]')
+    
+    div(class='font-[500]') Vị trí
+      each item, index in record
+        div(class='mt-[18px] font-[300] text-[12px]') #{item.position}  
+    div(class='font-[500]') Tiêu đề
+      each item, index in record
+        div(class='mt-[18px] text-[15px] font-[300] truncate w-[275px]') #{item.title} 
+    div(class='font-[500]') Trạng thái
+      each item, index in record
+        div(class='mt-[18px] rounded-[3px] text-center bg-[#78ADE2] text-white text-[12px] py-[3px]')
+          button() Hiển thị
+    div(class='font-[500]') Chức năng
+      each item, index in record
+        div(class='flex mt-[18px]')
+          button.bg-gray-500.text-white.rounded(class='ml-[5px] text-[12px] px-[8px] py-[3px]') <i class="fa-solid fa-file-pen"></i>
+          button.bg-yellow-500.text-white.rounded(class='ml-[5px] text-[12px] px-[8px] py-[3px]') <i class="fa-regular fa-pen-to-square"></i> 
+          button.bg-red-500.text-white.rounded(class='ml-[5px] text-[12px] px-[8px] py-[3px]') <i class="fa-regular fa-trash-can"></i>                    

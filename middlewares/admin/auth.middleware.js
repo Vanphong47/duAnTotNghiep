@@ -21,7 +21,7 @@ module.exports.requireAuth = async (req, res, next) => {
       _id: user.role_id,
       deleted: false,
     });
-    res.locals.user = user;
+    res.locals.user = user; // trả về giao diện các thông tin user
     res.locals.role = role;
     next();
   } catch (error) {

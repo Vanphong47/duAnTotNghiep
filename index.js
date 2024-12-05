@@ -8,6 +8,7 @@ const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const path = require("path"); // tinymce
+const moment = require("moment"); // định dạng thời gian
 
 dotenv.config(); // khởi tạo dotenv
 
@@ -45,6 +46,7 @@ app.use(flash());
 
 //App local variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment;
 
 // routesClient
 routerClient(app);

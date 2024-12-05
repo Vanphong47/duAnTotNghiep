@@ -4,21 +4,22 @@ include ../../mixin/search.pug
 
 
 block main
+  if(role.permissions.includes("account_view"))
+    +alert-success(5000)
+    div(class='border mx-[8px] bg-[]')
+        div(class='ml-[8px] text-[24px] font-bold my-[12px]') #{pageTitle}
 
-  +alert-success(5000)
-  div(class='border mx-[8px] bg-[]')
-    div(class='ml-[8px] text-[24px] font-bold my-[12px]') #{pageTitle}
-
-    div(class='flex items-center justify-between mb-[12px] mx-[8px]')
-        div(class='flex')            
-        div(class='flex')
-            +search(keyword)
-            button(class='w-[100px] h-[38px] bg-white border hover:bg-[#1876D2] rounded-[8px]')
-                a(
-                    href=`/${prefixAdmin}/accounts/create`
-                ) + Thêm mới
-  table.border-collapse.border.border-gray-300(class='ml-[10px] my-[10px] w-[100%]' checkbox-multi)
-    thead
+        div(class='flex items-center justify-between mb-[12px] mx-[8px]')
+            div(class='flex')            
+            div(class='flex')
+                +search(keyword)
+                if(role.permissions.includes("account_create"))
+                  button(class='w-[100px] h-[38px] bg-white border hover:bg-[#1876D2] rounded-[8px]')
+                    a(
+                        href=`/${prefixAdmin}/accounts/create`
+                    ) + Thêm mới
+    table.border-collapse.border.border-gray-300(class='ml-[10px] my-[10px] w-[100%]' checkbox-multi)
+      thead
         tr.bg-gray-200
             th.border.border-gray-300.px-2.py-2.text-left
                 input(
@@ -47,6 +48,7 @@ block main
                 td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200') #{item.role.title}
                 td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200') #{item.email}
                 td.border.border-gray-300.px-5.py-2(class='hover:bg-gray-200')
+                  if(role.permissions.includes("account_edit"))
                     if(item.status == 'active')
                         a(
                             href='javascript:;' 
@@ -65,21 +67,23 @@ block main
                         ) Dừng hoạt động  
                           
                 td.border.border-gray-300.px-10.py-2(class='hover:bg-gray-200')
-                    a(href=`/${prefixAdmin}/accounts/detail/${item.id}`)
-                        button.bg-gray-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-solid fa-file-pen"></i>            
+                  a(href=`/${prefixAdmin}/accounts/detail/${item.id}`)
+                    button.bg-gray-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-solid fa-file-pen"></i>     
+                  if(role.permissions.includes("account_edit"))      
                     a(href=`/${prefixAdmin}/accounts/edit/${item.id}`)
-                        button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-regular fa-pen-to-square"></i>
+                      button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-regular fa-pen-to-square"></i>
+                  if(role.permissions.includes("account_delete"))
                     button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) <i class="fa-regular fa-trash-can"></i>
   
-  form(
-    form-change-status 
-    action=""
-    method="POST"
-    data-path=`/${prefixAdmin}/accounts/change-status`
-  )
-  form(
-    form-delete-item 
-    action=""
-    method="POST"
-    data-path=`/${prefixAdmin}/accounts/delete`
-  )                            
+    form(
+        form-change-status 
+        action=""
+        method="POST"
+        data-path=`/${prefixAdmin}/accounts/change-status`
+    )
+    form(
+        form-delete-item 
+        action=""
+        method="POST"
+        data-path=`/${prefixAdmin}/accounts/delete`
+    )                            

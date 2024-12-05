@@ -163,6 +163,26 @@ if (buttonDelete.length > 0) {
 }
 // end delete item
 
+// Updatee item
+const buttonUndo = document.querySelectorAll("[button-undo]");
+console.log(buttonUndo);
+if (buttonUndo.length > 0) {
+  const undoItem = document.querySelector("[form-undo-item]");
+  const path = undoItem.getAttribute("data-path");
+  buttonUndo.forEach((button) => {
+    button.addEventListener("click", () => {
+      const isConfirm = confirm("Bạn có chắc muốn hoàn tác bản ghi này ??");
+      if (isConfirm == true) {
+        const id = button.getAttribute("data-id");
+        const action = `${path}/${id}?_method=PATCH`;
+        undoItem.action = action;
+        undoItem.submit();
+      }
+    });
+  });
+}
+// end Update item
+
 const showAlert = document.querySelector("[show-alert]");
 if (showAlert) {
   const time = parseInt(showAlert.getAttribute("data-time"));
