@@ -8,10 +8,11 @@
     i.fa-solid.fa-arrow-right(class='ml-[5px]')
 footer.flex.justify-around(class='mt-[40px] p-[30px]')
   div
-    img(src='https://demo2.wpopal.com/shopio/wp-content/uploads/2021/12/logo.svg' alt='shopio' class='mb-[15px]')
-    span(class='text-[#E8C592] text-[24px]')
-      | 8 (844) 880 - 33388
-    div(class='mt-[15px]') Copyright &copy; 2022 Shopio. All Rights Reserved.
+    img(src=settingGeneral.logo alt='shopio' class='mb-[15px]')
+    span(class='text-[#E8C592] text-[24px]') #{settingGeneral.phone}
+    div(class='mt-[15px]') #{settingGeneral.email}
+    div(class='mt-[15px]') #{settingGeneral.copyright}
+    div(class='mt-[15px]') #{settingGeneral.address}
   div
     ul
       li.uppercase.font-bold(class='mb-[8px]') liên kết

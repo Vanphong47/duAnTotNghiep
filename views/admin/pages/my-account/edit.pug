@@ -1,0 +1,29 @@
+extends ../../layouts/default.pug
+
+
+block main
+    h1(class="mb-4") Cập nhật thông tin cá nhân
+    form(
+      action=`/${prefixAdmin}/my-account/edit/?_method=PATCH`
+      method="POST"
+      enctype="multipart/form-data"
+    )
+        .mb-4
+            label.block.text-sm.font-medium.text-gray-700(for='fullName') Họ và tên*
+            input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#fullName(type='text', name='fullName', required, value=user.fullName)
+        .mb-4
+            label.block.text-sm.font-medium.text-gray-700(for='email') Email *
+            input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#email(type='text', name='email', required, value=user.email)     
+        .mb-4
+            label.block.text-sm.font-medium.text-gray-700(for='password') Mật Khẩu*
+            input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#password(type='password', name='password', required, value=user.password)  
+        .mb-4
+            label.block.text-sm.font-medium.text-gray-700(for='phone') Số Điện Thoại *
+            input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#password(type='text', name='phone', required, value=user.phone) 
+        .mb-4(upload-image)
+            label.block.text-sm.font-medium.text-gray-700(for='avatar') Ảnh
+            input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#avatar(type='file', name='avatar', accept='image/*', upload-image-input)
+            img.image-preview.mt-2(src=user.avatar, upload-image-preview)
+        .mb-4
+            button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Cập nhật
+    script(src='/admin/js/product.js')

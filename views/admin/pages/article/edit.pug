@@ -1,0 +1,42 @@
+extends ../../layouts/default.pug
+include ../../mixin/alert.pug
+
+block main
+    +alert-error(5000)
+    .container.bg-white(class='mx-[10px]')
+        h1(class='text-[24px] my-[8px]') #{pageTitle}
+        form(
+            action=`/${prefixAdmin}/article/edit/${article.id}?_method=PATCH`
+            method='POST'
+            enctype="multipart/form-data"
+            )
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='title') Tiêu đề
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#title(type='text', name='title', required, value=article.title)
+            //- .mb-4
+            //-     label.block.text-sm.font-medium.text-gray-700(for='article_category_id') Danh mục
+            //-     select#product_category_id.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2(name='article_category_id')
+            //-         option(value) -- Chọn danh mục cha -- 
+            .mb-4.flex.items-center
+                input.mr-2#featured1(type='radio', name='featured', value='1')
+                label.text-sm.font-medium.text-gray-700(for='featured1') Nổi bật
+                input.mr-2.ml-4#featured0(type='radio', name='featured', value='0', checked)
+                label.text-sm.font-medium.text-gray-700(for='featured0') Không
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='desc') Mô tả
+                textarea.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#desc(name='description', rows='5', textarea-mce) #{article.description}
+            .mb-4(upload-image)
+                label.block.text-sm.font-medium.text-gray-700(for='thumbnail') Ảnh
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#thumbnail(type='file', name='thumbnail', accept='image/*', upload-image-input)
+                img.image-preview.mt-2(src=article.thumbnail, upload-image-preview)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='position') Vị trí
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#position(type='number', name='position', placeholder='Tự động tăng', min='1', value=article.position)
+            .mb-4.flex.items-center
+                input.mr-2#statusActive(type='radio', name='status', value='active', checked=(article.status == "active" ? true : false))
+                label.text-sm.font-medium.text-gray-700(for='statusActive') Hiển thị
+                input.mr-2.ml-4#statusInActive(type='radio', name='status', value='inactive', checked=(article.status == "active" ? true : false))
+                label.text-sm.font-medium.text-gray-700(for='statusInActive') Dừng hiển thị
+            .mb-4
+                button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Cập nhật
+    script(src='/admin/js/product.js')

@@ -49,9 +49,9 @@ block main
                 input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#position(type='number', name='position', placeholder='Tự động tăng', min='1')
             .mb-4.flex.items-center
                 input.mr-2#statusActive(type='radio', name='status', value='active', checked)
-                label.text-sm.font-medium.text-gray-700(for='statusActive') Hoạt động
+                label.text-sm.font-medium.text-gray-700(for='statusActive') Hiển thị 
                 input.mr-2.ml-4#statusInActive(type='radio', name='status', value='inactive')
-                label.text-sm.font-medium.text-gray-700(for='statusInActive') Dừng hoạt động
+                label.text-sm.font-medium.text-gray-700(for='statusInActive') Dừng hiển thị
             .mb-4
                 button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Tạo mới
     script(src='/admin/js/product.js')

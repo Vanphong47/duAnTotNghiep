@@ -63,7 +63,16 @@ module.exports.index = async (req, res) => {
     //   }
     // }
     // hết lưu tt người xóa
-
+    // lưu tt người sửa
+    for (const product of products) {
+      const account = await Account.findOne({
+        _id: product.updatedBy.accountId,
+      });
+      if (account) {
+        product.updatedBy.fullName = account.fullName;
+      }
+    }
+    // hết lưu tt người sửa
     res.render("admin/pages/products/products", {
       pageTitle: "Danh Sách Sản Phẩm",
       products: products,
@@ -244,8 +253,8 @@ module.exports.editPatch = async (req, res) => {
     if (req.file && req.file.filename) {
       req.body.thumbnail = `/uploads/${req.file.filename}`;
     }
-    const objectUpdatedBy = {
-      accountId: res.locals.user.id,
+    req.body.updatedBy = {
+      accountId: res.locals.user.id, // thêm id của người dùng vào database
       updatedAt: new Date(),
     };
     await Product.updateOne(
@@ -255,11 +264,10 @@ module.exports.editPatch = async (req, res) => {
       },
       {
         ...req.body,
-        $push: { updatedBy: objectUpdatedBy }, // thêm thời gian sửa trong database
       }
     );
     req.flash("success", "Chỉnh sửa sản phẩm thành công!");
-    res.redirect("back");
+    res.redirect(`/${system.prefixAdmin}/products`);
   } catch (error) {
     res.send("Error");
   }
@@ -277,6 +285,7 @@ module.exports.detail = async (req, res) => {
       pageTitle: "chi tiết sản phẩm",
       product: product,
     });
+    // viết logic kiểm tra số lượng người xem tại đây
   } catch (error) {
     res.redirect(`/${system.prefixAdmin}/products`);
   }

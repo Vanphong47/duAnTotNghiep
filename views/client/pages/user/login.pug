@@ -1,0 +1,64 @@
+extends ../../layouts/default.pug 
+
+block main 
+
+  div(class='mt-[30px] ml-[8%]')
+    div(class='flex text-[#5C3F2C] items-center text-[12px] font-[600]') 
+      <i class="fa-solid fa-house-user mr-[8px]"></i>
+      a(href='/') TRANG CHỦ /
+      span(class='uppercase ml-[3px]') Đăng nhập tài khoản
+  span(class=' mt-[12px] ml-[8%] flex text-[#5C3F2C] items-center text-[12px] font-[600]') 
+    | Nếu bạn đã có tài khoản, hãy đăng nhập tại đây.
+  //- h1(class='text-[36px] w-full text-center mt-[20px]') #{pageTitle}
+  div(class='flex justify-around mx-[8%]') 
+    div(class='flex-1')
+      span(class='text-[36px] w-full ml-[20%]') #{pageTitle}
+      form(
+        action="/user/login"
+        method='POST'
+        class='mt-[12px]'
+      )
+        div(class='mb-[12px]')
+          lable(for="email" class='font-[500]') Email 
+            span(class='text-[#FF0000]') *
+          br
+          input(
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            class='border-[2px] w-[600px] h-[40px] bg-[#ECF0FD] mt-[12px] outline-none px-[15px]'
+            required
+          )
+        div(class='mb-[12px]')
+          lable(for="password" class='font-[500]') Mật khẩu 
+            span(class='text-[#FF0000]') *
+          br
+          input(
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Mật khẩu"
+            class='border-[2px] w-[600px] h-[40px] bg-[#ECF0FD] mt-[12px] outline-none px-[15px]'
+            required
+          )
+        div(class='mt-[22px]')
+          button(
+            type='submit'
+            class='w-[180px] h-[45px] bg-[#35C0C5] hover:cursor-pointer text-white uppercase'
+          ) Đăng Nhập
+      div(class='mt-[8px]')
+        a(
+          class=' text-[18px] text-[#1876D2] hover:opacity-[0.7]'
+          href='/user/password/forgot'
+        ) Quên mật khẩu ?
+    div(class='flex-1')
+      span(class='text-[36px] w-full ml-[20%] mt-[20px] ') Bạn chưa có tài khoản
+      div(class='mt-[12px] mb-[12px] opacity-[0.7]')
+        | Đăng ký tài khoản để mua hàng nhanh hơn. Theo dõi đơn đặt hàng, vận chuyển. Cập nhật các tin tức sự kiện và các chương trình giảm giá của chúng tôi.
+      a(
+        href='/user/register'
+      )
+        button(
+          class='w-[180px] h-[45px] bg-[#35C0C5] hover:cursor-pointer text-white uppercase'
+        ) Đăng ký

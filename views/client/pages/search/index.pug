@@ -1,0 +1,62 @@
+extends ../../layouts/default.pug
+
+block main
+  .border.w-full.flex.justify-center.items-center(class='py-[20px]')
+    a(class='mr-[5px]' href=`/`)
+      span(class='text-[#9C9C9C]') Trang chủ
+    i.fa-solid.fa-chevron-right(class='text-[8px] mr-[5px]')
+    a(class='mr-[5px]' href='')
+      span(class='text-[#9C9C9C]') Nhẫn
+    i.fa-solid.fa-chevron-right(class='text-[8px] mr-[5px]')
+    span(class='font-[600]') Đèn đá hoa cương nhỏ
+  if(products.length > 0)
+    each item in products
+      .flex.justify-around(class='mt-[40px]')
+      
+        div(class='ml-[30px]')
+          img(class='w-[587px] h-[740px]' src=item.thumbnail, alt=item.title)
+        div(class='mr-[30px] w-[50%]')
+          .flex.justify-between
+            div
+              if(products.stock != 0)
+                .inline-block(class='p-[5px] rounded-[3px] bg-[#E6F6E3] text-[#6BC85C] mb-[12px]')
+                  | Còn hàng
+              else 
+                .inline-block(class='p-[5px] rounded-[3px] bg-[#E56D6D] text-[#FFFFFF] mb-[12px]')
+                  | Hết hàng   
+
+              div(class='text-[24px] font-[600] mb-[12px]') #{item.title}
+              .flex(class='mb-[12px]')
+                i.fa-solid.fa-star(class='text-[#F89619]')
+                i.fa-solid.fa-star(class='text-[#F89619]')
+                i.fa-solid.fa-star(class='text-[#F89619]')
+                i.fa-solid.fa-star(class='text-[#F89619]')
+                i.fa-regular.fa-star
+                div(class='text-[#9C9C9C] text-[12px]') ( 5 &Dstrok;&aacute;nh Gi&aacute; )
+            div(class='text-[#D5D5D5] mb-[12px]')
+                i.fa-solid.fa-arrow-left(class='ml-[5px]')
+                a(class='ml-[5px]' href='') Tr&#x1B0;&#x1EDB;c &dstrok;&oacute;
+                a(class='ml-[5px]' href='') K&#x1EBF; ti&#x1EBF;p
+                i.fa-solid.fa-arrow-right(class='ml-[5px]')
+          .border-t.w-full(class='mt-[12px]')
+          div(class='text-[24px] text-[#81C142] font-[600] mt-[40px]') #{item.price}$ #{item.priceNew}$
+        
+          div !{item.description}
+        
+          .flex.border(class='p-[24px] rounded-[5px]')
+            .border(class='py-[10px] px-[5%] mr-[2%] rounded-[5px]')  số lượng #{item.stock}
+            .text-white(class='py-[10px] px-[10%] text-[18px] bg-[#81C142] rounded-[5px]')
+                i.fa-solid.fa-cart-shopping(class='mr-[12px]')
+                |              Thêm vào giỏ hàng
+          div(class='text-[#D5D5D5] mt-[40px]')
+            | Th&#x1EC3; Lo&#x1EA1;i:
+          span Nh&#x1EAB;n
+          div(class='text-[#D5D5D5]')
+          | Th&#x1EBB;:
+          span S&#x1EA3;n ph&#x1EA9;m 10
+  else 
+    div 
+      div Không tìm thấy sản phẩm nào
+ 
+
+

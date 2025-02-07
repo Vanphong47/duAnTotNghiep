@@ -1,18 +1,18 @@
-const User = require("../../models/user.model");
+const User = require("../../model/user.model");
 module.exports.requireAuth = async (req, res, next) => {
-    if(!req.cookies.tokenUser){
-        res.redirect("/user/login");
+  if (!req.cookies.tokenUser) {
+    res.redirect("/user/login");
+  } else {
+    const user = await User.findOne({
+      tokenUser: req.cookies.tokenUser,
+      status: "active",
+      deleted: false,
+    }).select("-password");
+    if (!user) {
+      res.redirect("/user/login");
     } else {
-        const user = await User.findOne({
-            tokenUser: req.cookies.tokenUser,
-            status: "active",
-            deleted: false,
-        }).select("-password");
-        if(!user){
-            res.redirect("/user/login");
-        } else {
-            res.locals.infoUser = user;
-            next();
-        }
+      res.locals.infoUser = user;
+      next();
     }
+  }
 };

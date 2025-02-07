@@ -10,28 +10,31 @@ block main
     .border-t.border-black(class='w-[2%] m-[12px]')
     .uppercase(class='font-[600]') Khám phá các mặt hàng của chúng tôi
   .flex.justify-center(class='mt-[40px] flex-wrap')
-    each item, index in products
-      .relative(class='ml-[24px] border mt-[24px]')
-        a(href=`/products/${item.slug}`)
-          img(class='w-[300px] h-[409px]' src=item.thumbnail alt=item.title)
-        .absolute.text-white.font-bold(class='px-[8px] rounded-[10px] bg-[#E56D6D] top-[3%] left-[3%] text-[12px]')
-          | -#{item.discountPercentage}%
-        if(item.stock == 0)  
-          .absolute.text-white.font-bold(class='px-[8px] rounded-[10px] bg-[#E56D6D] top-[3%] right-[3%] text-[12px]')
-            | Hết hàng          
-        .flex.flex-col.items-center(class='py-[8px]')
-          span(class='text-[#999999] my-[5px]') #{item.title}
-          a(href=`/products/${item.slug}` class='mt-[5px]')
-            span(class='font-[600]') #{item.title}
-          div(class='mt-[5px]')
-            i.fa-solid.fa-star(class='text-[#E8C592]')
-            i.fa-solid.fa-star(class='text-[#E8C592]')
-            i.fa-solid.fa-star(class='text-[#E8C592]')
-            i.fa-solid.fa-star(class='text-[#E8C592]')
-            i.fa-regular.fa-star
-          .flex(class='mt-[5px]')
-            span(class='text-[18px] text-[#E56D6D] mr-[3px]') $#{item.priceNew}
-            span(class='text-[12px] text-[#9C9C9C] line-through flex justify-center items-center') $#{item.price}   
+    if(products.length > 0)
+      each item, index in products
+        .relative(class='ml-[24px] border mt-[24px]')
+          a(href=`/products/detail/${item.slug}`)
+            img(class='w-[300px] h-[409px]' src=item.thumbnail alt=item.title)
+          .absolute.text-white.font-bold(class='px-[8px] rounded-[10px] bg-[#E56D6D] top-[3%] left-[3%] text-[12px]')
+            | -#{item.discountPercentage}%
+          if(item.stock == 0)  
+            .absolute.text-white.font-bold(class='px-[8px] rounded-[10px] bg-[#E56D6D] top-[3%] right-[3%] text-[12px]')
+              | Hết hàng          
+          .flex.flex-col.items-center(class='py-[8px]')
+            span(class='text-[#999999] my-[5px]') #{item.title}
+            a(href=`/products/detail/${item.slug}` class='mt-[5px]')
+              span(class='font-[600]') #{item.title}
+            div(class='mt-[5px]')
+              i.fa-solid.fa-star(class='text-[#E8C592]')
+              i.fa-solid.fa-star(class='text-[#E8C592]')
+              i.fa-solid.fa-star(class='text-[#E8C592]')
+              i.fa-solid.fa-star(class='text-[#E8C592]')
+              i.fa-regular.fa-star
+            .flex(class='mt-[5px]')
+              span(class='text-[18px] text-[#E56D6D] mr-[3px]') $#{item.priceNew}
+              span(class='text-[12px] text-[#9C9C9C] line-through flex justify-center items-center') $#{item.price}   
+    else
+      div Không tìm thấy spham nào
   +pagination(pagination) 
   img(
     class='w-full'

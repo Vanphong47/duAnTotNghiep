@@ -1,0 +1,31 @@
+include sub-menu-helper.pug
+mixin sub-menu(items)
+    ul(class='flex justify-between font-[600]')
+      each item in items
+        li(class=' pr-[15px] ')
+          a(
+            href=`/products/${item.slug}`
+            class='text-[#42210d] hover:opacity-[0.7] text-[15px]'
+          ) #{item.title}
+          if(item.children)
+            +sub-menu-helper(item.children)
+            //- +sub-menu(item.children)
+
+
+
+
+    //-   li(class=' pr-[15px]')
+    //-     a(class='text-[#42210d]') Nội dung 2
+    //-     ul(class='flex flex-col')
+    //-         li(class='ml-[8px] mt-[5px] text-[14px]') Cột 2
+    //-         li(class='ml-[8px] mt-[5px] text-[14px]') Cột 2
+    //-         li(class='ml-[8px] mt-[5px] text-[14px]') Cột 2
+    //-         ul(class='flex flex-col')
+    //-             li(class='ml-[8px] mt-[5px] text-[14px]') Cột 3
+    //-         li(class='ml-[8px] text-[14px]') Cột 2
+    //-   li(class=' pr-[15px]')
+    //-     a(class='text-[#42210d]') Nội dung 3
+    //-   li(class=' pr-[15px]')
+    //-     a(class='text-[#42210d]') Nội dung 4
+    //-   li(class=' pr-[15px]')
+    //-     a(class='text-[#42210d]') Nội dung 5  

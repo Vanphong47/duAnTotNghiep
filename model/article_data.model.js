@@ -20,12 +20,10 @@ const articleSchema = new mongoose.Schema(
       accountId: String,
       deletedAt: Date,
     },
-    updatedBy: [
-      {
-        accountId: String,
-        updatedAt: Date,
-      },
-    ],
+    updatedBy: {
+      accountId: String,
+      updatedAt: Date,
+    },
   },
   {
     timestamps: true,

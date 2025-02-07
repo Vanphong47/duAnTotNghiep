@@ -1,0 +1,26 @@
+extends ../../layouts/default.pug
+
+block main
+
+  h1(class="ml-[15px] text-[24px] font-bold my-[12px]") #{pageTitle}
+  <table class="min-w-full bg-white border border-gray-300">  
+    <thead class="bg-gray-200">  
+      <tr>  
+        <th class="py-2 px-4 border-b border-r">Tên</th>  
+        <th class="py-2 px-4 border-b border-r">Số điện thoại</th>  
+        <th class="py-2 px-4 border-b border-r">Email</th>  
+        <th class="py-2 px-4 border-b border-r">Mật khẩu</th>
+        <th class="py-2 px-4 border-b border-r">Trạng thái</th>
+      </tr>  
+    </thead>  
+    <tbody>  
+      each item in records
+        <tr class="hover:bg-gray-100 ">  
+            <td class="py-2 px-4 border-b border-r uppercase text-center">#{item.fullName}</td>  
+            <td class="py-2 px-4 border-b border-r text-center">#{item.phone}</td>  
+            <td class="py-2 px-4 border-b border-r text-center">#{item.email}</td>  
+            <td class="py-2 px-4 border-b border-r text-center">#{item.password}</td> 
+            <td class="py-2 px-4 border-b border-r text-center">#{item.statusOnline}</td>
+        </tr>  
+    </tbody>  
+  </table>

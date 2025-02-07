@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug 
+
+block main
+
+  div(class='mt-[30px] ml-[8%]')
+    div(class='flex text-[#5C3F2C] items-center text-[12px] font-[600]') 
+      <i class="fa-solid fa-house-user mr-[8px]"></i>
+      a(href='/') TRANG CHỦ
+  h1(class='text-[24px] font-bold w-full text-start ml-[8%] mt-[20px] uppercase') #{pageTitle}
+  div(class='mt-[30px] ml-[25%]') 
+    div(class='bg-[#6BC85C] text-white w-[700px] h-[60px] flex items-center justify-center rounded-[3px]')
+      div Chúc mừng bạn đã đặt hàng thành công! Chúng tôi sẽ xử lí đơn hàng trong thời gian sớm nhất
+      
+  div(class='text-[#777777] text-[18px] uppercase mt-[30px] ml-[25%]') Thông tin cá nhân:
+  div(class=' mt-[30px] ml-[25%]')
+    div(class='') Họ và tên: 
+      span(class='font-bold size-[18px] ml-[3px]') #{order.userInfo.fullName}
+    div(class='') Số điện thoại: 
+      span(class='font-bold size-[18px] ml-[3px]') #{order.userInfo.phone}
+    div(class='') Địa chỉ: 
+      span(class='font-bold size-[18px] ml-[3px]') #{order.userInfo.address}
+    div(class='') Email: 
+      span(class='font-bold size-[18px] ml-[3px]') #{order.userInfo.email}
+  div(class='text-[#777777] text-[18px] uppercase mt-[30px] ml-[25%]') Thông tin đơn hàng:
+  div(class='w-full h-auto mt-[30px] ml-[25%] flex ')
+    table(class='w-[780px] h-auto border table-fixed' table-cart)
+      thead(class='border-b-[3px] border-[1px]')
+        tr(class='text-[#777777] text-[18px] uppercase')
+          th(class='py-[5px] border-r' ) STT
+          th(class='py-[5px] border-r' ) Ảnh
+          th(class='py-[5px] border-r' ) Tên sp
+          th(class='py-[5px] border-r') Giá
+          th(class='py-[5px] border-r') Số lượng
+          th(class='py-[5px] border-r') Tạm tính
+          
+      tbody
+        if(order.products.length > 0)
+          each item, index in order.products
+            tr(class='text-center text-[15px] border-b') 
+              td(class='py-[5px] border-r') #{index+1}
+              td(class='py-[5px] border-r')
+                img(src=item.thumbnail alt=item.title width='100%' ) 
+              td(class='py-[5px] border-r') #{item.title}
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.priceNew}$
+              td(class='py-[5px] border-r') #{item.quantity}
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.totalPrice}
+
+        else 
+          tr(class='text-center text-[18px]') 
+            td(colspan='7') Chưa có sản phẩm nào!
+
+
+  div(class='mt-[30px] ml-[25%] w-[50%]')
+    div(class='border-b-[3px] px-[5px] py-[3px] w-[50%] font-bold')
+      span(class='text-[#777777] text-[18px] uppercase') Tổng đơn hàng:
+    div(class='border-b-[3px] px-[5px] py-[3px] w-[50%] flex justify-between')
+      div(class='mt-[8px]')
+        span(class='text-[#777777] text-[16px]') Thành tiền:
+      div(class='mt-[8px]')
+        if(order.products.length > 0)
+          span(class='text-[#E56D6D] text-[24px] font-bold') #{order.totalPrice}$

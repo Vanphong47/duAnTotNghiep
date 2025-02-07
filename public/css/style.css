@@ -5,3 +5,35 @@
 }
 body {
 }
+/* sub menu  */
+/* .sub-menu {
+  position: relative;
+  z-index: 999;
+}
+
+.sub-menu ul {
+  position: absolute;
+  background: white;
+  width: auto;
+  display: none;
+} */
+
+/* .sub-menu ul li {
+}
+
+.sub-menu:hover > ul {
+  display: flex;
+}
+
+.sub-menu ul li {
+  position: relative;
+}
+
+.sub-menu ul li ul {
+  top: 12px;
+  z-index: 999;
+}
+.sub-menu ul li:hover > ul {
+  display: flex;
+} */
+/* end sub  */

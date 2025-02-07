@@ -23,6 +23,18 @@ const productCategorySchema = new mongoose.Schema(
       default: false, // mặc định để false cho sản phẩm
     },
     deletedAt: Date,
+    createdBy: {
+      accountId: String,
+      createdAt: Date,
+    },
+    deletedBy: {
+      accountId: String,
+      deletedAt: Date,
+    },
+    updatedBy: {
+      accountId: String,
+      updatedAt: Date,
+    },
   },
   {
     timestamps: true,

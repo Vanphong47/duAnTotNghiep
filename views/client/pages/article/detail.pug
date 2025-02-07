@@ -1,0 +1,17 @@
+extends ../../layouts/default.pug 
+
+block main
+  if(article.title)
+    h1(class="mb-4") #{article.title}
+
+    
+  if (article.thumbnail)
+    div(class="mb-4")
+      img(
+        src=article.thumbnail
+        style="width: 200px"
+      )
+
+
+  if (article.description)
+    div(class="mb-4") !{article.description}

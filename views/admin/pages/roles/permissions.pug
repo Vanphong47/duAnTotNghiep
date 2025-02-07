@@ -57,7 +57,36 @@ block main
             each item in records  
               td(class="text-center px-[3px] py-[4px] border border-gray-300")  
                 input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
-          //- Hết Danh mục sản phẩm  
+          //- Hết Danh mục sản phẩm
+
+          //- Danh sách bài viết  
+          tr  
+            td(colspan="3" class="font-bold px-[3px] py-[4px]")  
+              b Danh sách bài viết  
+          tr(data-name="article_view" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xem  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="article_create" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Thêm mới  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="article_edit" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Chỉnh sửa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+
+          tr(data-name="article_delete" class="border-b")  
+            td(class="border border-gray-300 pl-[8px]") Xóa  
+            each item in records  
+              td(class="text-center px-[3px] py-[4px] border border-gray-300")  
+                input(type="checkbox" class="form-checkbox h-[12px] w-[12px] text-blue-600")  
+          //- Hết Danh sách bài viết
 
           //- Danh sách sản phẩm  
           tr  

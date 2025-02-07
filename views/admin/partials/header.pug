@@ -1,16 +1,32 @@
 header.w-full.text-white(class='bg-white h-[70px] w-full border flex items-center')
-  div(class='flex items-center ml-[15px] justify-between')
+  div(class='flex items-center ml-[15px] justify-between w-full')
     div.flex
       div(class='text-[25px] text-black')
         i.fa-solid.fa-house-user(class='mr-[5px]')
         a(href=`/${prefixAdmin}/dashboard`) ARCHITECT 
         i.fa-solid.fa-bars(class='ml-[45px] opacity-[0.7] text-[#3E69D5]')
-      div(class='text-black ml-[12px] h-full hover:opacity-[0.7]')
-        a(href=`/`)
+        a(
+          class='hover:opacity-[0.7] ml-[5px]'
+          href=`/`
+        )
           <i class="fa-solid fa-share"></i>
           | Trở về Website
-        a(href=`/${prefixAdmin}/auth/logout`)
-          <i class="fa-solid fa-share"></i>
-          | Đăng xuất 
+    div(class='text-black ml-[12px] h-full flex items-center justify-center')
+      a(
+        class='mr-[3px]'
+        href=`/${prefixAdmin}/my-account`
+      )
+        img(
+          class='rounded-[50%] w-[40px] h-[40px] border'
+          src=user.avatar
+          alt=""
+        )
+        
+      a(
+        class='hover:opacity-[0.7]'
+        href=`/${prefixAdmin}/auth/logout`
+      )
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        | Đăng xuất
 
     

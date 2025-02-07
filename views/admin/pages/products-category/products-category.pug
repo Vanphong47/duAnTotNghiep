@@ -5,6 +5,7 @@ include ../../mixin/search.pug
 include ../../mixin/form-change-multi.pug
 include ../../mixin/sort.pug
 include ../../mixin/filterState.pug
+include ../../mixin/moment.pug
 
 block main
   if(role.permissions.includes("products-category_view"))
@@ -41,7 +42,7 @@ block main
                     a(
                         href=`/${prefixAdmin}/products-category/create`
                     ) + Thêm mới
-    table.border-collapse.border.border-gray-300(class='ml-[10px] my-[10px] w-[75%]' checkbox-multi)
+    table.border-collapse.border.border-gray-300(class='ml-[10px] my-[10px] w-full' checkbox-multi)
       thead
         tr.bg-gray-200
             th.border.border-gray-300.px-2.py-2.text-left
@@ -53,6 +54,7 @@ block main
             th.border.border-gray-300.px-4.py-2.text-left Hình Ảnh
             th.border.border-gray-300.px-4.py-2.text-left Tiêu Đề
             th Vị trí
+            th.border.border-gray-300.px-4.py-2.text-left Tạo bởi
             th.border.border-gray-300.px-4.py-2.text-left Trạng Thái
             th.border.border-gray-300.px-4.py-2.text-left Hành Động
         each item, index in records    
@@ -76,6 +78,11 @@ block main
                     value=item.position
                     class='border text-center'
                   )
+                td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200')
+                  p #{item.createdBy.fullName}
+                  if(item.createdBy.createdAt)
+                    +formatDate(item.createdBy.createdAt)
+                    +formatTime(item.createdBy.createdAt)
                 td.border.border-gray-300.px-5.py-2(class='hover:bg-gray-200')
                   if(role.permissions.includes("products-category_edit"))
                     if(item.status == 'active')

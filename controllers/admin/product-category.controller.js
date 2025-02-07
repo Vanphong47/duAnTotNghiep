@@ -1,4 +1,5 @@
 const ProductCategory = require("../../model/product-category.model");
+const Account = require("../../model/account.model.js");
 const system = require("../../config/system");
 const createTreeHelper = require("../../helpers/create-tree.helper");
 const paginationHelper = require("../../helpers/pagination.helper");
@@ -33,12 +34,21 @@ module.exports.index = async (req, res) => {
     } else {
       sort["position"] = "desc";
     }
-    console.log(countProduct);
     // End sort
     const records = await ProductCategory.find(find)
       .sort(sort)
       .limit(objectPagination.limitItems)
       .skip(objectPagination.skip); //Phân trang;
+    // Lưu thông tin người tạo
+    for (const record of records) {
+      const account = await Account.findOne({
+        _id: record.createdBy.accountId,
+      });
+      if (account) {
+        record.createdBy.fullName = account.fullName;
+      }
+    }
+    // hết lưu tt người tạo
     res.render("admin/pages/products-category/products-category.pug", {
       pageTitle: "Danh mục sản phẩm",
       records: records,
@@ -79,6 +89,10 @@ module.exports.createPost = async (req, res) => {
     if (req.file && req.file.filename) {
       req.body.thumbnail = `/uploads/${req.file.filename}`; // lưu tên file ảnh vào data
     }
+    req.body.createdBy = {
+      accountId: res.locals.user.id, // thêm id của người dùng vào database
+      createdAt: new Date(),
+    };
     const records = new ProductCategory(req.body);
     await records.save(); // dòng code để update
     req.flash("success", "Thêm mới danh mục sản phẩm thành công!");
@@ -113,7 +127,11 @@ module.exports.deleteItem = async (req, res) => {
       },
       {
         deleted: true,
-        deletedAt: new Date(),
+        // deletedAt: new Date(),
+        deletedBy: {
+          accountId: res.locals.user.id,
+          deletedAt: new Date(), // thêm ai là người xóa trong database
+        },
       }
     );
   } catch (error) {
@@ -155,7 +173,10 @@ module.exports.editPatch = async (req, res) => {
     if (req.file && req.file.filename) {
       req.body.thumbnail = `/uploads/${req.file.filename}`;
     }
-
+    req.body.updatedBy = {
+      accountId: res.locals.user.id, // thêm id của người dùng vào database
+      updatedAt: new Date(),
+    };
     await ProductCategory.updateOne(
       {
         _id: req.params.id,

@@ -34,12 +34,12 @@ const productSchema = new mongoose.Schema(
       accountId: String,
       deletedAt: Date,
     },
-    updatedBy: [
-      {
-        accountId: String,
-        updatedAt: Date,
-      },
-    ],
+    updatedBy: {
+      accountId: String,
+      updatedAt: Date,
+    },
+    featured: String, // Nổi bật
+    view: Number,
   },
   {
     timestamps: true,

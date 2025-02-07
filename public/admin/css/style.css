@@ -60,3 +60,42 @@ body {
   display: none;
 }
 /* End Image Preview */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px; /* Giữa các cột */
+  margin-left: 15px;
+  margin-top: 30px;
+}
+
+.col-6 {
+  flex: 0 0 50%; /* Chiếm 50% chiều rộng */
+  max-width: 30%;
+}
+
+.card {
+  background-color: #fff; /* Màu nền */
+  border-radius: 8px; /* Đường viền bo tròn */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+  margin-bottom: 16px; /* Khoảng cách dưới thẻ card */
+}
+
+.card-header {
+  background-color: #f8f9fa; /* Màu nền cho header */
+  padding: 8px 16px; /* Padding cho header */
+  font-weight: bold; /* Chữ đậm */
+  font-size: 1.2rem; /* Kích thước chữ */
+}
+
+.card-body {
+  padding: 16px; /* Padding cho body */
+}
+
+.card-body p {
+  margin: 8px 0; /* Khoảng cách giữa các đoạn văn */
+}
+
+.card-body b {
+  color: #000; /* Màu sắc của chữ đậm */
+}

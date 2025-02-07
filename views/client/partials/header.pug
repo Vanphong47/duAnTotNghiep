@@ -1,58 +1,127 @@
+include ../mixin/sub-menu.pug
+
 header
   .w-full.h-auto.border
     .flex.justify-around(class='py-[18px] relative')
-      div(class='text-[22px] font-[600]') 8 (844) 880 - 33388
+      div(class='text-[22px] font-[600]') #{settingGeneral.phone}
       div
         a(href='')
-          img(src='https://demo2.wpopal.com/shopio/wp-content/uploads/2021/12/logo.svg' alt='Shopio')
-      div(class='text-[22px]')
-        i.fa-solid.fa-magnifying-glass(
+          img(src=settingGeneral.logo alt='Shopio')
+      div(class='text-[22px] flex justify-center items-center')
+        div.fa-solid.fa-magnifying-glass(
           id='search'
           class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer open-search'
         )
-        i.fa-regular.fa-heart(class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
-        i.fa-regular.fa-user(class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
-        i.fa-solid.fa-cart-shopping(class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+        div.fa-regular.fa-heart(class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+        a(href="/cart")
+          div.fa-solid.fa-cart-shopping(class='mr-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
+          span(class='text-[13px] relative left-[-10px] top-[-18px] opacity-[0.7]') (#{cart ? cart.products.length : 0})
+        if(user)    
+          div(class='flex flex-col')
+            a(
+              class='text-[12px]'
+              href='/user/info'
+            ) 
+              
+              span Tài khoản
+            a(
+              class='text-[12px]'
+              href='/user/logout'
+            )
+              <i class="fa-solid fa-arrow-right-from-bracket mr-[5px]"></i>
+              span Đăng xuất
+
+        else 
+          div(class='flex flex-col')
+            a(
+              class='text-[12px]'
+              href='/user/register'
+            ) 
+              <i class="fa-solid fa-unlock mr-[5px]"></i>
+              span Đăng ký
+              
+            a(
+              class='text-[12px]'
+              href='/user/login'
+            ) 
+              <i class="fa-solid fa-user mr-[5px]"></i>
+              span Đăng nhập
 
 
+    
       .w-full.border.flex.justify-center(
         id='search-header'
-        class='py-[30px] bg-[#DCDCDC] open-search-header absolute top-[0px] z-[999] hidden'
+        class='py-[30px] bg-[#DCDCDC] open-search-header absolute top-[0px] z-[9999] hidden'
         )
-        .relative
-          input(class='p-[12px] w-[600px] rounded-[8px] outline-none' type='text' placeholder='Nhập vào đây...........')
-          i.fa-solid.fa-magnifying-glass.absolute(class='top-[15px] right-[12px]')
-        .flex.relative(class='w-[18px] h-[18px] top-[-24px] right-[-20%] hover:text-[#E8C592] hover:cursor-pointer')
-          i.fa-solid.fa-xmark.m-auto
+        form(
+          action="/search"
+          method='GET'
+        )
+          .relative
+            input(class='p-[12px] w-[600px] rounded-[8px] outline-none' type='text' name="keyword" placeholder='Nhập vào đây...........')
+            button(type='submit')
+              i.fa-solid.fa-magnifying-glass.absolute(class='top-[15px] right-[12px]')
+          .flex.relative(class='w-[18px] h-[18px] top-[-67px] right-[-142%] hover:text-[#E8C592] hover:cursor-pointer')         
+            i.fa-solid.fa-xmark.m-auto
 
 
 
-    .border-t.h-auto(class='py-[18px]')
-      .flex.justify-center.items-center
-        ul.flex.flex-row.justify-between(class='font-[600]')
-          a(href='/')
+    .border-t.h-auto
+      .flex.justify-center.items-center(class='h-[64px]')
+        ul.flex.flex-row.justify-between(class='font-[600] h-full flex justify-center items-center')
+          a(href='/' class='h-full flex justify-center items-center')
             li.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
               | Trang chủ
-          a(href='/intro')
+          a(href='/intro' )
             li.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
-              | Giới Thiệu
-          a(href='/products')
-            li.flex.justify-center.align-center.relative.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
-              | Trang sức
-              i.fa-solid.fa-sort-down(class='ml-[5px]')
-              .absolute.text-white(class='text-[10px] px-[5px] rounded-[20px] top-[-25px] left-[2px] bg-[#F89619]')
+              | Giới thiệu
+          li.flex.justify-center.align-center.transition.relative(class='mr-[28px] ml-[12px] hover:cursor-pointer group h-full top-[19px]')
+            a(href='/products' class='h-full')
+              span(class='hover:text-[#EBCC9F]') Trang sức
+              i.fa-solid.fa-sort-down(class='ml-[5px] hover:text-[#EBCC9F] mt-[2px]')
+              .absolute.text-white(class='text-[10px] px-[12px] rounded-[20px] top-[-28px] left-[2px] bg-[#F89619]')
                 | Bộ sưu tập
-          a(href='/article')
+            if(layoutCategoryProducts)
+              div(class='hidden w-[1000px] h-auto absolute border top-[45px] z-[999] group-hover:block bg-white px-[30px] py-[10px]')       
+                +sub-menu(layoutCategoryProducts)                                                                        
+          a(href='/article' class='' )
             li.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
               | Bài viết
-          a(href='/')
-            li.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
-              | Thông tin
-          a(href='/')
+          li
+            li.transition(class='relative mr-[28px] ml-[12px] hover:cursor-pointer group h-[70px] flex')
+              span(class='m-auto hover:text-[#EBCC9F]') Thông tin
+              div(class='absolute top-[66px] left-[-55px] w-[200px] h-[120px] border z-[999] px-[12px] py-[5px] text-[16px] bg-white hidden group-hover:flex group-hover:flex-col')
+                a(
+                  href='/information/huong-dan-do-size'
+                  class='mb-[3px]'
+                )
+                  span(class='hover:underline') Hướng dẫn đo sai
+                a(
+                  href='/information/bao-hanh-bao-quan'
+                  class='mb-[3px]'
+                ) 
+                  span(class='hover:underline') Bảo hành & bảo quản
+                a(
+                  href='/information/giao-hang-doi-hang'
+                  class='mb-[3px]'
+                ) 
+                  span(class='hover:underline') Giao hàng & đổi hàng 
+                a(
+                  href='/information/thanh-toan'
+                  class=''
+                ) 
+                  span(class='hover:underline') Hình thức thanh toán
+          a(href='/' )
             li.relative.transition(class='mr-[28px] ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
               | Sản phẩm hot
-              .absolute.text-white(class='text-[10px] px-[5px] rounded-[20px] top-[-25px] left-[15px] bg-[#E56D6D]')
+              .absolute.text-white(class='text-[10px] px-[12px] rounded-[20px] top-[-28px] left-[25px] bg-[#E56D6D]')
                 | Hot
-          a(href='/')
-            li.transition(class='ml-[12px] hover:text-[#EBCC9F] hover:cursor-pointer')
-              | Liên hệ                
+          li
+            li.transition(class='relative mr-[28px] ml-[12px] hover:cursor-pointer group h-[70px] flex')
+              span(class='m-auto hover:text-[#EBCC9F]') Liên hệ
+              div(class='absolute top-[66px] left-[-55px] w-[175px] h-[70px] border z-[999] px-[12px] py-[5px] text-[16px] bg-white hidden group-hover:flex group-hover:flex-col')
+                a(class='mb-[3px]')
+                  span(class='hover:underline') Địa chỉ
+                a(class='mb-[3px]') 
+                  span(class='hover:underline') Tuyển dụng
+              

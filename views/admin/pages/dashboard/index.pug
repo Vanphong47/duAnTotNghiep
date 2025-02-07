@@ -1,4 +1,73 @@
-extends ../../layouts/default.pug
+extends ../../layouts/default.pug  
 
-block main
-  h1 #{pageTitle}
+block main  
+  h1(class='ml-[15px] text-[24px] font-bold my-[12px]') #{pageTitle}:  
+
+  div(class='w-[700px] border-[2px] px-[12px] py-[8px] flex flex-col m-auto')
+    span(class='text-center text-[24px] mb-[12px] uppercase font-[500]') Thông tin tài khoản
+    if(user.avatar)
+      img(
+        src=user.avatar 
+        class='w-[100px] h-[100px] border rounded-[50%] m-auto'
+      )
+    div(class='flex flex-col m-auto mt-[12px]')
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Họ và Tên:
+        input(
+          class='px-[5px] py-[3px] uppercase ml-[8px] '
+          value=user.fullName
+        )
+    
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Email:
+        input(
+          class='px-[5px] py-[3px] ml-[8px] w-[220px]'
+          value=user.email
+        )
+    
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Số điện thoại:
+        input(
+          class='px-[5px] py-[3px] ml-[8px] '
+          value=user.phone
+        )
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Phân quyền:
+        input(
+          class='px-[5px] py-[3px] uppercase ml-[8px] '
+          value=role.title
+        )
+
+  
+  .row 
+    .col-6 
+      .card.mb-4
+        .card-header Danh mục sản phẩm 
+        .card-body 
+          p Số lượng: <b>#{statistic.categoryProduct.total}</b>
+          p Hoạt động: <b>#{statistic.categoryProduct.total}</b>
+          p Dừng hoạt động: <b>#{statistic.categoryProduct.total}</b>
+  
+    .col-6 
+      .card.mb-4
+        .card-header Sản phẩm 
+        .card-body 
+          p Số lượng: <b>#{statistic.product.total}</b>
+          p Hoạt động: <b>#{statistic.product.active}</b>
+          p Dừng hoạt động: <b>#{statistic.product.inactive}</b>
+ 
+    .col-6 
+      .card.mb-4
+        .card-header Tài khoản Admin
+        .card-body 
+          p Số lượng: <b>#{statistic.account.total}</b>
+          p Hoạt động: <b>#{statistic.account.active}</b>
+          p Dừng hoạt động: <b>#{statistic.account.inactive}</b>
+   
+    .col-6 
+      .card.mb-4
+        .card-header Tài khoản Client 
+        .card-body 
+          p Số lượng: <b>#{statistic.user.total}</b>
+          p Hoạt động: <b>#{statistic.user.active}</b>
+          p Dừng hoạt động: <b>#{statistic.user.inactive}</b> 

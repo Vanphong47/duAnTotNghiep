@@ -1,0 +1,16 @@
+extends ../../layouts/default.pug 
+
+block main 
+  div(class='mt-[30px] ml-[8%]')
+    div(class='flex text-[#5C3F2C] items-center text-[12px] font-[600]') 
+      <i class="fa-solid fa-house-user mr-[8px]"></i>
+      a(href='/') TRANG CHỦ /
+      span(class='uppercase ml-[3px]') Thông tin cá nhân
+  span(class=' mt-[12px] ml-[8%] flex text-[#5C3F2C] items-center text-[12px] font-[600]') 
+    | Xin chào <p class='uppercase text-[15px] mx-[5px]'>#{user.fullName}</p> ! Cảm ơn bạn vì đã tin dùng sản phẩm của chúng tôi.
+  h1(class='text-[36px] w-full ml-[8%] mt-[15px]') #{pageTitle}:
+  div(class='flex flex-col ml-[12%]')
+    span Họ và tên: <span class='text-[17px] font-[500] uppercase'> #{user.fullName} </span> 
+    span Email: <span class='text-[17px] font-[500]'> #{user.email} </span>
+    span Số điện thoại: <span class='text-[17px] font-[500]'> #{user.phone} </span> 
+    

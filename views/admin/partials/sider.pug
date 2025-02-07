@@ -29,7 +29,10 @@ sider(class='w-[250px] bg-[#F1F4F6] h-[1080px]')
     if(role.permissions.includes("account_view"))    
       li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
         i.fa-solid.fa-user(class='mr-[8px] opacity-[0.7]')
-        a(href=`/${prefixAdmin}/accounts` class="text-[12px]") Danh sách tài khoản           
+        a(href=`/${prefixAdmin}/accounts` class="text-[12px]") Danh sách tài khoản 
+    li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+      i.fa-regular.fa-user(class='mr-[8px] opacity-[0.7]')
+      a(href=`/${prefixAdmin}/user` class="text-[12px]") Danh sách người dùng           
 
     li(class='pt-[15px] font-bold mt-[15px] text-[#3E69D5] ml-[8px]')
       | THÊM MỚI
@@ -50,8 +53,14 @@ sider(class='w-[250px] bg-[#F1F4F6] h-[1080px]')
         i.fa-solid.fa-user-plus(class='mr-[8px] opacity-[0.7]')
         a(href=`/${prefixAdmin}/accounts/create` class="text-[12px]") Thêm mới tài khoản  
     li(class='pt-[15px] font-bold mt-[15px] text-[#3E69D5] ml-[8px]')
+      | CÀI ĐẶT 
+      li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
+        <i class="fa-solid fa-wrench mr-[8px] opacity-[0.7]"></i>
+        a(href=`/${prefixAdmin}/settings/general` class="text-[12px]") Cài đặt chung 
+    li(class='pt-[15px] font-bold mt-[15px] text-[#3E69D5] ml-[8px]')
       | THÙNG RÁC  
     if(role.permissions.includes("trash_view"))
       li.flex.items-center.opacity-70(class='pt-[18px] ml-[16px]')
         i.fa-regular.fa-trash-can(class='mr-[8px] opacity-[0.7]')
-        a(href=`/${prefixAdmin}/trashbin` class="text-[12px]") Thùng rác                         
+        a(href=`/${prefixAdmin}/trashbin` class="text-[12px]") Thùng rác
+                        

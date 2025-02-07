@@ -1,0 +1,36 @@
+extends ../../layouts/default.pug
+
+
+
+
+block main
+    .container.bg-white(class='mx-[10px]')
+        h1(class='text-[24px] my-[8px]') #{pageTitle}
+        form(
+            action=`/${prefixAdmin}/settings/general?_method=PATCH`
+            method='POST'
+            enctype="multipart/form-data"
+            )
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='websiteName') Tên website
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#websiteName(type='text', name='websiteName' value=(settingGeneral ? settingGeneral.websiteName : ""))
+            .mb-4(upload-image)
+                label.block.text-sm.font-medium.text-gray-700(for='logo') Logo
+                input.mt-1.block.w-full.rounded-md.p-2#logo(type='file', name='logo', accept='image/*', upload-image-input)
+                img.image-preview.mt-2(src=(settingGeneral ? settingGeneral.logo : ""), upload-image-preview)
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='phone') Số điện thoại 
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#phone(type='text', name='phone', value=(settingGeneral ? settingGeneral.phone : ""))
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='email') Email 
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#email(type='text', name='email',value=(settingGeneral ? settingGeneral.email : ""))
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='address') Địa chỉ
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#address(type='text', name='address',value=(settingGeneral ? settingGeneral.address : ""))                                
+            .mb-4
+                label.block.text-sm.font-medium.text-gray-700(for='copyright') Copyright 
+                input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#copyright(type='text', name='copyright' value=(settingGeneral ? settingGeneral.copyright : ""))
+                
+            .mb-4
+                button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Cập nhật
+    script(src='/admin/js/product.js')

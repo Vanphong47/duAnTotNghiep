@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug 
+include ../../mixin/moment.pug
 
 block main
   div 
@@ -12,70 +13,91 @@ block main
       div(class='border-t w-full')
 
     div(class='flex justify-center flex-wrap mb-[80px] h-auto')
-      div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
-        div(class='mb-[12px]')
-            img(
-            class='w-[350px] h-[350px]'
-            src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/900x900-kat-4802-4.jpg?v=1530120343987"
-            alt="")
-        span(class='mb-[12px]') 25/11/2024
-        div(class='mb-[12px] flex-wrap w-[350px]')
-          | Tác dụng không tưởng của bạc 925 sẽ làm bạn bất ngờ
-        div(class='text-[12px] flex-wrap w-[350px]')
-          | Bạc 925 là một loại chất phân tử có hàm luyện chuyển thành bạc nhờ sự hấp thụ của nó từ đá vào tinh thể.
-      div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
-        div(class='mb-[12px]')
-            img(
-            class='w-[350px] h-[350px]'
-            src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/prettygossip-jewelry-cleaner-before-and-after1-1024x823.jpg?v=1530120197030"
-            alt="")
-        span(class='mb-[12px]') 25/11/2024
-        div(class='mb-[12px] flex-wrap w-[350px]')
-          | Tác sao bạc lại bị đen ?
-        div(class='text-[12px] flex-wrap w-[350px]')
-          | Nếu bạn nào là 1 fan của trang sức bạc nhưng mồ hôi da lại không hợp thì đừng ngừng ngại nhé. Có hàng trăm cách làm sáng bạc được KaT Jewelry giới thiệu đâyyy
-      div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
-        div(class='mb-[12px]')
-            img(
-            class='w-[350px] h-[350px]'
-            src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/katjewelry-062174294016-n.jpg?v=1530120422670"
-            alt="")
-        span(class='mb-[12px]') 25/11/2024
-        div(class='mb-[12px] flex-wrap w-[350px]')
-          | Dị ứng bạc từ đâu, nguyên nhân thực sự có phải do bạc? 
-        div(class='text-[12px] flex-wrap w-[350px]')
-          | Những nhầm lẫn về bạc làm bạn bị dị ứng ? hoặc đeo bạc bị ngứa ? . Bài viết đã giải thích rõ được những thắc mắc về bạc 925 và tại sao bạn bị dị ứng !!! Hãy nhấp vào đây để đọc thêm những kiến thức về bạc nhaaaa                   
-      div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
-        div(class='mb-[12px]')
-            img(
-            class='w-[350px] h-[350px]'
-            src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/1-lua-chon-qua-tang-sinh-nhat-ban-gai.jpg?v=1706782402337"
-            alt="")
-        span(class='mb-[12px]') 25/11/2024
-        div(class='mb-[12px] flex-wrap w-[350px]')
-          | Top 10 món quà tặng sinh nhật cho bạn gái ý nghĩa, tinh tế 
-        div(class='text-[12px] flex-wrap w-[350px]')
-          | Tặng quà sinh nhật cho bạn gái là dịp lý tưởng để thể hiện tình cảm và sự quan tâm. Vậy nên tặng quà sinh nhật gì cho bạn gái? Để giúp bạn làm cho ngày đặc biệt này trở nên đáng nhớ, Kat Jewelry đã tổng hợp danh sách Top 10 món quà tặng sinh nhật cho bạn gái ý nghĩa, tinh tế. Hãy cùng chúng tôi khám phá những ý tưở...
-      div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
-        div(class='mb-[12px]')
-            img(
-            class='w-[350px] h-[350px]'
-            src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/2-qua-tang-sinh-nhat-sep-nu.jpg?v=1705458771810"
-            alt="")
-        span(class='mb-[12px]') 25/11/2024
-        div(class='mb-[12px] flex-wrap w-[350px]')
-          | 10+ quà tặng sinh nhật cao cấp, ý nghĩa nhất cho mọi đối tượng 
-        div(class='text-[12px] flex-wrap w-[350px]')
-          | Tặng quà sinh nhật cho bạn gái là dịp lý tưởng để thể hiện tình cảm và sự quan tâm. Vậy nên tặng quà sinh nhật gì cho bạn gái? Để giúp bạn làm cho ngày đặc biệt này trở nên đáng nhớ, Kat Jewelry đã tổng hợp danh sách Top 10 món quà tặng sinh nhật cho bạn gái ý nghĩa, tinh tế. Hãy cùng chúng tôi khám phá những ý tưở...
-      div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
-        div(class='mb-[12px]')
-            img(
-            class='w-[350px] h-[350px]'
-            src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/2-lam-do-handmade-de-the-hien-su-quan-tam-cua-ban.jpg?v=1706778981160"
-            alt="")
-        span(class='mb-[12px]') 25/11/2024
-        div(class='mb-[12px] flex-wrap w-[350px]')
-          | 30+ Gợi ý món quà sinh nhật cho nam đẹp vô cùng ý nghĩa 
-        div(class='text-[12px] flex-wrap w-[350px]')
-          | Những khoảnh khắc quan trọng như sinh nhật luôn đòi hỏi sự chọn lựa cẩn thận để tạo ra những trải nghiệm đặc biệt và ý nghĩa. Sinh nhật nam nên tặng gì? Đối với nam giới, món quà sinh nhật không chỉ là vật dụng hay sản phẩm, mà còn là biểu tượng của sự quan tâm và tình cảm. Dưới đây là danh sách gợi ý món quà sinh ..
+      each item in recordAricle
+        div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
+          div(class='mb-[12px]')
+            a(href=`/article/detail/${item.id}`)
+              img(
+              class='w-[350px] h-[350px]'
+              src=item.thumbnail
+              alt=item.title)
+          span(class='mb-[12px]')
+            if(item.updatedBy.updatedAt)
+              +formatDate(item.updatedBy.updatedAt)
+          div(class='mb-[12px] flex-wrap w-[350px]')
+            a(href=`/article/detail/${item.id}`)
+              | #{item.title}
+          div(class='text-[12px] flex-wrap w-[350px] h-[50px] truncate')
+            | !{item.description}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      //- div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
+      //-   div(class='mb-[12px]')
+      //-       img(
+      //-       class='w-[350px] h-[350px]'
+      //-       src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/prettygossip-jewelry-cleaner-before-and-after1-1024x823.jpg?v=1530120197030"
+      //-       alt="")
+      //-   span(class='mb-[12px]') 25/11/2024
+      //-   div(class='mb-[12px] flex-wrap w-[350px]')
+      //-     | Tác sao bạc lại bị đen ?
+      //-   div(class='text-[12px] flex-wrap w-[350px]')
+      //-     | Nếu bạn nào là 1 fan của trang sức bạc nhưng mồ hôi da lại không hợp thì đừng ngừng ngại nhé. Có hàng trăm cách làm sáng bạc được KaT Jewelry giới thiệu đâyyy
+      //- div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
+      //-   div(class='mb-[12px]')
+      //-       img(
+      //-       class='w-[350px] h-[350px]'
+      //-       src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/katjewelry-062174294016-n.jpg?v=1530120422670"
+      //-       alt="")
+      //-   span(class='mb-[12px]') 25/11/2024
+      //-   div(class='mb-[12px] flex-wrap w-[350px]')
+      //-     | Dị ứng bạc từ đâu, nguyên nhân thực sự có phải do bạc? 
+      //-   div(class='text-[12px] flex-wrap w-[350px]')
+      //-     | Những nhầm lẫn về bạc làm bạn bị dị ứng ? hoặc đeo bạc bị ngứa ? . Bài viết đã giải thích rõ được những thắc mắc về bạc 925 và tại sao bạn bị dị ứng !!! Hãy nhấp vào đây để đọc thêm những kiến thức về bạc nhaaaa                   
+      //- div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
+      //-   div(class='mb-[12px]')
+      //-       img(
+      //-       class='w-[350px] h-[350px]'
+      //-       src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/1-lua-chon-qua-tang-sinh-nhat-ban-gai.jpg?v=1706782402337"
+      //-       alt="")
+      //-   span(class='mb-[12px]') 25/11/2024
+      //-   div(class='mb-[12px] flex-wrap w-[350px]')
+      //-     | Top 10 món quà tặng sinh nhật cho bạn gái ý nghĩa, tinh tế 
+      //-   div(class='text-[12px] flex-wrap w-[350px]')
+      //-     | Tặng quà sinh nhật cho bạn gái là dịp lý tưởng để thể hiện tình cảm và sự quan tâm. Vậy nên tặng quà sinh nhật gì cho bạn gái? Để giúp bạn làm cho ngày đặc biệt này trở nên đáng nhớ, Kat Jewelry đã tổng hợp danh sách Top 10 món quà tặng sinh nhật cho bạn gái ý nghĩa, tinh tế. Hãy cùng chúng tôi khám phá những ý tưở...
+      //- div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
+      //-   div(class='mb-[12px]')
+      //-       img(
+      //-       class='w-[350px] h-[350px]'
+      //-       src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/2-qua-tang-sinh-nhat-sep-nu.jpg?v=1705458771810"
+      //-       alt="")
+      //-   span(class='mb-[12px]') 25/11/2024
+      //-   div(class='mb-[12px] flex-wrap w-[350px]')
+      //-     | 10+ quà tặng sinh nhật cao cấp, ý nghĩa nhất cho mọi đối tượng 
+      //-   div(class='text-[12px] flex-wrap w-[350px]')
+      //-     | Tặng quà sinh nhật cho bạn gái là dịp lý tưởng để thể hiện tình cảm và sự quan tâm. Vậy nên tặng quà sinh nhật gì cho bạn gái? Để giúp bạn làm cho ngày đặc biệt này trở nên đáng nhớ, Kat Jewelry đã tổng hợp danh sách Top 10 món quà tặng sinh nhật cho bạn gái ý nghĩa, tinh tế. Hãy cùng chúng tôi khám phá những ý tưở...
+      //- div(class='mr-[12px] p-[8px] border-[3px] text-[#5C3F2C] mt-[50px]')
+      //-   div(class='mb-[12px]')
+      //-       img(
+      //-       class='w-[350px] h-[350px]'
+      //-       src="https://bizweb.dktcdn.net/thumb/large/100/302/551/articles/2-lam-do-handmade-de-the-hien-su-quan-tam-cua-ban.jpg?v=1706778981160"
+      //-       alt="")
+      //-   span(class='mb-[12px]') 25/11/2024
+      //-   div(class='mb-[12px] flex-wrap w-[350px]')
+      //-     | 30+ Gợi ý món quà sinh nhật cho nam đẹp vô cùng ý nghĩa 
+      //-   div(class='text-[12px] flex-wrap w-[350px]')
+      //-     | Những khoảnh khắc quan trọng như sinh nhật luôn đòi hỏi sự chọn lựa cẩn thận để tạo ra những trải nghiệm đặc biệt và ý nghĩa. Sinh nhật nam nên tặng gì? Đối với nam giới, món quà sinh nhật không chỉ là vật dụng hay sản phẩm, mà còn là biểu tượng của sự quan tâm và tình cảm. Dưới đây là danh sách gợi ý món quà sinh ..
     

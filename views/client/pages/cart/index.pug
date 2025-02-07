@@ -1,0 +1,87 @@
+extends ../../layouts/default.pug 
+
+block main
+
+  div(class='mt-[30px] ml-[8%]')
+    div(class='flex text-[#5C3F2C] items-center text-[12px] font-[600]') 
+      <i class="fa-solid fa-house-user mr-[8px]"></i>
+      a(href='/') TRANG CHỦ
+  h1(class='text-[24px] font-bold w-full text-start ml-[8%] mt-[20px] uppercase') #{pageTitle}
+  
+  div(class='w-full h-auto mt-[30px] ml-[12%] flex ')
+    table(class='w-[780px] h-auto border table-fixed' table-cart)
+      thead(class='border-b-[3px] border-[1px]')
+        tr(class='text-[#777777] text-[18px] uppercase')
+          th(class='py-[5px] border-r' ) STT
+          th(class='py-[5px] border-r' ) Ảnh
+          th(class='py-[5px] border-r' ) Tên sp
+          th(class='py-[5px] border-r') Giá
+          th(class='py-[5px] border-r') Số lượng
+          th(class='py-[5px] border-r') Tạm tính
+          th(class='py-[5px] border-r') Hành động
+      tbody
+        if(cartDetail.products.length > 0)
+          each item, index in cartDetail.products
+            tr(class='text-center text-[15px] border-b') 
+              td(class='py-[5px] border-r') #{index+1}
+              td(class='py-[5px] border-r')
+                img(src=item.productInfo.thumbnail alt=item.productInfo.title width='100%' ) 
+              td(class='py-[5px] border-r truncate')
+                a(
+                    class='text-[#1876D2]'
+                    href=`/products/detail/${item.productInfo.slug}`
+                ) #{item.productInfo.title}
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.productInfo.priceNew}$
+              td(class='py-[5px] border-r')
+                input(
+                type="number"
+                name='quantity'
+                value=item.quantity
+                item-id=item.product_id
+                style='width: 60px'
+                class='border'
+                )
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.totalPrice}
+              td(class='py-[5px] border-r')
+                a(
+                class='bg-[#FF0000] text-white rounded-[3px] px-[8px] py-[3px]'
+                href=`/cart/delete/${item.product_id}`
+                ) Xóa 
+        else 
+          tr(class='text-center text-[18px]') 
+            td(colspan='7') Chưa có sản phẩm nào!
+
+
+  div(class='mt-[30px] ml-[12%] w-[50%]')
+    div(class='border-b-[3px] px-[5px] py-[3px] w-[50%] font-bold')
+      span(class='text-[#777777] text-[18px] uppercase') Cộng giỏ hàng
+    div(class='border-b-[1px] px-[5px] py-[3px] w-[50%] flex justify-between')
+      div(class='mt-[8px]')
+        span(class='text-[#777777] text-[15px]') Tạm tính
+      div(class='mt-[8px]')
+        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}$
+    div(class='border-b-[3px] px-[5px] py-[3px] w-[50%] flex justify-between')
+      div(class='mt-[8px]')
+        span(class='text-[#777777] text-[15px]') Tổng
+      div(class='mt-[8px]')
+        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}$
+    div(class='mt-[12px] px-[5px] py-[8px] w-[50%] bg-[#FF5555] flex items-center justify-center')  
+      a(
+        href=`/checkout/checkOrder`
+        class='text-white text-[15px] uppercase font-bold'
+      ) Tiến hành thanh toán
+
+
+  div(class='ml-[12%] group mt-[30px]') 
+    a(
+      href='/products'
+      class='rounded-[3px] border-[3px] px-[5px] py-[5px] text-[#A06951] group-hover:bg-[#A06951] group-hover:text-white' style='border-color: #A06951'
+    ) 
+        <i class="fa-solid fa-arrow-left mr-[5px] "></i>
+        pan(class=' font-bold ') Tiếp tục xem sản phẩm
+
+
+
+
+ 
+            

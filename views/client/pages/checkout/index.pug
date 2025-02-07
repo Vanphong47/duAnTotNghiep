@@ -1,0 +1,146 @@
+extends ../../layouts/default.pug 
+
+block main
+
+  div(class='mt-[30px] ml-[8%]')
+    div(class='flex text-[#5C3F2C] items-center text-[12px] font-[600]') 
+      <i class="fa-solid fa-house-user mr-[8px]"></i>
+      a(href='/') TRANG CHỦ
+  h1(class='text-[24px] font-bold w-full text-start ml-[8%] mt-[20px] uppercase') #{pageTitle} :
+  
+  div(class='w-full h-auto mt-[30px] ml-[25%] flex ')
+    table(class='w-[780px] h-auto border table-fixed' table-cart)
+      thead(class='border-b-[3px] border-[1px]')
+        tr(class='text-[#777777] text-[18px] uppercase')
+          th(class='py-[5px] border-r' ) STT
+          th(class='py-[5px] border-r' ) Ảnh
+          th(class='py-[5px] border-r' ) Tên sp
+          th(class='py-[5px] border-r') Giá
+          th(class='py-[5px] border-r') Số lượng
+          th(class='py-[5px] border-r') Tạm tính
+          
+      tbody
+        if(cartDetail.products.length > 0)
+          each item, index in cartDetail.products
+            tr(class='text-center text-[15px] border-b') 
+              td(class='py-[5px] border-r') #{index+1}
+              td(class='py-[5px] border-r')
+                img(src=item.productInfo.thumbnail alt=item.productInfo.title width='100%' ) 
+              td(class='py-[5px] border-r') #{item.productInfo.title}
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.productInfo.priceNew}$
+              td(
+                class='py-[5px] border-r'
+              ) #{item.quantity}
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.totalPrice}
+
+        else 
+          tr(class='text-center text-[18px]') 
+            td(colspan='7') Chưa có sản phẩm nào!
+
+
+  div(class='mt-[30px] ml-[25%] w-[50%]')
+    div(class='border-b-[3px] px-[5px] py-[3px] w-[50%] font-bold')
+      span(class='text-[#777777] text-[18px] uppercase') Tổng đơn hàng:
+    div(class='border-b-[3px] px-[5px] py-[3px] w-[50%] flex justify-between')
+      div(class='mt-[8px]')
+        span(class='text-[#777777] text-[15px]') Thành tiền:
+      div(class='mt-[8px]')
+        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}$
+
+  div(class='ml-[25%] group mt-[30px]') 
+    a(
+      href='/products'
+      class='rounded-[3px] border-[3px] px-[5px] py-[5px] text-[#A06951] group-hover:bg-[#A06951] group-hover:text-white' style='border-color: #A06951'
+    ) 
+        <i class="fa-solid fa-arrow-left mr-[5px] "></i>
+        span(class=' font-bold ') Tiếp tục xem sản phẩm
+  
+  form(
+    action="/checkout/order"
+    method='POST'
+  )
+    div(class='ml-[25%] mt-[30px] w-[700px] border flex flex-col items-center py-[10px]') 
+        div
+          span(class='uppercase font-bold text-[24px]') Thông tin thanh toán :
+        div(class='mt-[15px]')
+            lable(class='font-[500] text-[15px]' for="fullName") Họ và tên *
+            br
+            input(
+                class='border w-[620px] h-[37px] mt-[8px] px-[8px]'
+                placeholder='Nhập họ tên...'
+                id='fullName'
+                name='fullName'
+                required
+                type='text'
+            )
+        div(class='mt-[15px]')
+            lable(class='font-[500] text-[15px]' for="address") Địa chỉ *
+            br
+            input(
+                class='border w-[620px] h-[37px] mt-[8px] px-[8px]'
+                placeholder='Nhập địa chỉ...'
+                id='address'
+                name='address'
+                type='text'
+                required
+            )
+        div(class='mt-[15px]')
+            lable(class='font-[500] text-[15px]' for="city") Tỉnh / Thành phố *
+            br
+            select(
+                class='border w-[620px] h-[37px] mt-[8px]'
+                id='city'
+                name='city'
+            )
+              option(value) Hà Nội
+              option(value) Bắc Ninh
+              option(value) Hồ Chí Minh
+        div(class='mt-[15px]')
+            lable(class='font-[500] text-[15px]' for="phone") Số điện thoại *
+            br
+            input(
+                class='border w-[620px] h-[37px] mt-[8px] px-[8px]'
+                placeholder='Nhập sđt...'
+                id='phone'
+                name='phone'
+                type='text'
+                required
+            )
+
+        div(class='mt-[15px]')
+            lable(class='font-[500] text-[15px]' for="email") Nhập email *
+            br
+            input(
+                class='border w-[620px] h-[37px] mt-[8px] px-[8px]'
+                placeholder='Nhập email...'
+                id='email'
+                type='text'
+                name='email'
+            )
+        div(class='mt-[15px]')
+            lable(class='font-[500] text-[18px] uppercase text-[#777777]' for="fullName") Thông tin bổ xung:
+            br
+            lable(class='font-[500] text-[15px]') Ghi chú đơn hàng (tùy chọn)
+            br
+            textarea(
+                class='border w-[620px] h-[120px] mt-[8px] px-[8px]'
+                placeholder='Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn.'
+                id='notes'
+                type='text'
+                name='notes'
+            )
+    
+        div(class='mt-[15px] mb-[8px]')
+          button(
+            type='submit'         
+            class='w-[300px] h-[37px] uppercase bg-[#E56D6D]'
+            id='pay-check'
+          ) Đặt hàng
+          
+      
+
+
+
+
+ 
+            

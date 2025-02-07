@@ -66,6 +66,7 @@ block main
             th.border.border-gray-300.px-4.py-2.text-left Đơn giá
             th.border.border-gray-300.px-2.py-2.text-left Vị trí
             th.border.border-gray-300.px-4.py-2.text-left Tạo bởi
+            th.border.border-gray-300.px-4.py-2.text-left Sửa bởi
             th.border.border-gray-300.px-4.py-2.text-left Trạng Thái
             th.border.border-gray-300.px-4.py-2.text-left Chức năng
         each item, index in products    
@@ -97,6 +98,11 @@ block main
                     //- p #{moment(item.createdBy.createdAt).format("DD/MM/YY HH:mm:ss")}
                     +formatDate(item.createdBy.createdAt)
                     +formatTime(item.createdBy.createdAt)
+                td.border.border-gray-300.py-4(class=' pl-4')
+                  p #{item.updatedBy.fullName}
+                  if(item.updatedBy.updatedAt)                
+                    +formatDate(item.updatedBy.updatedAt)
+                    +formatTime(item.updatedBy.updatedAt)                    
                 td.border.border-gray-300.px-5.py-2(class='')
                   if(role.permissions.includes("products_edit"))
                     if(item.status == 'active')
@@ -106,7 +112,7 @@ block main
                             data-id = item.id 
                             data-status = item.status 
                             button-change-status
-                        ) Hoạt động
+                        ) Hiển thị
                     else 
                         a(
                             href='javascript:;' 
@@ -114,8 +120,8 @@ block main
                             data-id = item.id 
                             data-status = item.status 
                             button-change-status
-                        ) Dừng hoạt động    
-                td.border.border-gray-300.px-10.py-2(class='')
+                        ) Dừng hiển thị    
+                td.border.border-gray-300.px-2.py-2(class='')
                     a(href=`/${prefixAdmin}/products/detail/${item.id}`)
                         button.bg-gray-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-solid fa-file-pen"></i>
                     if(role.permissions.includes("products_edit"))

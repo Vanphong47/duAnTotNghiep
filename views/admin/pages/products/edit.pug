@@ -24,9 +24,9 @@ block main
                     if(records)
                       +select-tree(records, 1, product.product_category_id)
             .mb-4.flex.items-center
-                input.mr-2#featured1(type='radio', name='featured', value='1')
+                input.mr-2#featured1(type='radio', name='featured', value='1', checked=(product.featured == "1" ? true : false))
                 label.text-sm.font-medium.text-gray-700(for='featured1') Nổi bật
-                input.mr-2.ml-4#featured0(type='radio', name='featured', value='0', checked)
+                input.mr-2.ml-4#featured0(type='radio', name='featured', value='0', checked=(product.featured == "0" ? true : false))
                 label.text-sm.font-medium.text-gray-700(for='featured0') Không
             .mb-4
                 label.block.text-sm.font-medium.text-gray-700(for='desc') Mô tả
@@ -49,9 +49,9 @@ block main
                 input.mt-1.block.w-full.border.border-gray-300.rounded-md.p-2#position(type='number', name='position', placeholder='Tự động tăng', min='1', value=product.position)
             .mb-4.flex.items-center
                 input.mr-2#statusActive(type='radio', name='status', value='active', checked=(product.status == "active" ? true : false))
-                label.text-sm.font-medium.text-gray-700(for='statusActive') Hoạt động
+                label.text-sm.font-medium.text-gray-700(for='statusActive') Hiển thị
                 input.mr-2.ml-4#statusInActive(type='radio', name='status', value='inactive', checked=(product.status == "inactive" ? true : false))
-                label.text-sm.font-medium.text-gray-700(for='statusInActive') Dừng hoạt động
+                label.text-sm.font-medium.text-gray-700(for='statusInActive') Dừng hiển thị
             .mb-4
                 button.bg-blue-600.text-white.font-semibold.p-2.rounded(type='submit') Cập nhật
     script(src='/admin/js/product.js')

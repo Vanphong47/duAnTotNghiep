@@ -1,0 +1,77 @@
+extends ../../layouts/default.pug
+
+block main 
+  //- h1(class="mb-4") Thông tin cá nhân 
+
+  //- if(user.avatar)
+  //-   img(src=user.avatar width="150px" class="mb-3")
+  //- else 
+  //-   img(src="/admin/images/avatar.png" width="150px" class="mb-3")
+
+  //- if (user.fullName)
+  //-   p Họ tên: <b>#{user.fullName}</b>
+
+  //- if (user.email)
+  //-   p Email: <b>#{user.email}</b> 
+
+  //- if (user.phone)
+  //-   p Số Điện Thoại: <b>#{user.phone}</b>
+
+  //- p 
+  //-   span Trạng thái: 
+  //-   span 
+  //-     <b>#{user.status == "active" ? "Hoạt động": "Dừng hoạt động"}</b>
+
+  //- if (role.title)
+  //-   p Phân quyền: <b>#{role.title}</b>
+
+  //- a(
+  //-   href=`/${prefixAdmin}/my-account/edit`
+  //-   class="btn btn-primary"
+  //- ) Chỉnh sửa thông tin    
+  h1(class='ml-[15px] text-[24px] font-bold my-[12px]') #{pageTitle}:  
+
+  div(class='w-[700px] border-[2px] px-[12px] py-[8px] flex flex-col m-auto')
+    span(class='text-center text-[24px] mb-[12px] uppercase font-[500]') Thông tin tài khoản
+    if(user.avatar)
+      img(
+        src=user.avatar 
+        class='w-[100px] h-[100px] border rounded-[50%] m-auto'
+      )
+    div(class='flex flex-col m-auto mt-[12px]')
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Họ và Tên:
+        input(
+          class='px-[5px] py-[3px] uppercase ml-[8px] '
+          value=user.fullName
+        )
+    
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Email:
+        input(
+          class='px-[5px] py-[3px] ml-[8px] w-[220px]'
+          value=user.email
+        )
+    
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Số điện thoại:
+        input(
+          class='px-[5px] py-[3px] ml-[8px] '
+          value=user.phone
+        )
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Trạng thái:
+        input(
+          class='px-[5px] py-[3px] ml-[8px] '
+          value=user.status == "active" ? "Hoạt động" : "Dừng hoạt động"  
+        )
+      div(class='flex items-center')
+        lable(class='text-[15px] font-bold') Phân quyền:
+        input(
+          class='px-[5px] py-[3px] uppercase ml-[8px] '
+          value=role.title
+        )
+      a(
+        href=`/${prefixAdmin}/my-account/edit`
+        class="bg-[#35C0C5] border text-center text-white"
+      ) Chỉnh sửa thông tin   

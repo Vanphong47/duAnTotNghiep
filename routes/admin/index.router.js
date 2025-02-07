@@ -6,6 +6,10 @@ const accountsRouter = require("./account.route");
 const authRouter = require("./auth.router");
 const trashRouter = require("./trashbin.router");
 const articleRouter = require("./article.router");
+const myAccountRouter = require("./my-account.router");
+const userCilentRoiuter = require("./userClient.router");
+
+const settingRouter = require("./setting.route");
 const systemConfig = require("../../config/system");
 
 const authMiddleware = require("../../middlewares/admin/auth.middleware"); // middleware cho các trang link tới đăng nhập
@@ -28,4 +32,11 @@ module.exports = (app) => {
   app.use(`${PATH_ADMIN}/auth`, authRouter);
   app.use(`${PATH_ADMIN}/trashbin`, authMiddleware.requireAuth, trashRouter);
   app.use(`${PATH_ADMIN}/article`, authMiddleware.requireAuth, articleRouter);
+  app.use(
+    `${PATH_ADMIN}/my-account`,
+    authMiddleware.requireAuth,
+    myAccountRouter
+  );
+  app.use(`${PATH_ADMIN}/user`, authMiddleware.requireAuth, userCilentRoiuter);
+  app.use(`${PATH_ADMIN}/settings`, authMiddleware.requireAuth, settingRouter);
 };

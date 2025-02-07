@@ -1,0 +1,27 @@
+extends ../../layouts/default.pug
+
+block main
+  if(article.title)
+    h1(class="mb-4") #{article.title}
+
+    
+  if (article.thumbnail)
+    div(class="mb-4")
+      img(
+        src=article.thumbnail
+        style="width: 200px"
+      )
+
+  if (article.status)
+    div(class="mb-4")
+      span Trạng thái:
+      if (article.status === "active")
+        span(class="badge badge-success") Hiển thị
+      else
+        span(class="badge badge-danger") Dừng hiển thị
+
+  if (article.position)
+    div(class="mb-4") Vị trí: <b>#{article.position}</b>
+
+  if (article.description)
+    div(class="mb-4") !{article.description}

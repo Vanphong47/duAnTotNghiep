@@ -1,0 +1,10 @@
+mixin sub-menu-helper(items)
+  ul(class='flex flex-col')
+    each item in items
+      li(class='ml-[8px] mt-[5px]') 
+        a(
+          href=`/products/${item.slug}`
+          class='text-[14px]' 
+        ) 
+          <i class="fa-solid fa-diamond text-[8px] mr-[5px]"></i>
+          span(class='hover:underline') #{item.title}

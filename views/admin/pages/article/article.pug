@@ -1,24 +1,158 @@
 extends ../../layouts/default.pug
+include ../../mixin/search.pug
+include ../../mixin/moment.pug
+include ../../mixin/pagination.pug
 block main
-  h1(class='mt-[18px] ml-[8px] text-[24px] font-[600]') #{pageTitle} 
-  div(class='mt-[15px] ml-[8px] px-[8px] py-[8px] border rounded-[5px] flex items-center justify-center hover:bg-[#1876D2] w-[90px] border-[#1876D2]')
-    span(class='text-[13px] text-[#1876D2] hover:text-white cursor-pointer font-[500]') + Thêm mới
- 
-  div(class='mt-[30px] h-auto w-full mx-[8px] flex justify-between bg-[#F8F8F8] py-[12px] px-[24px]')
-    
-    div(class='font-[500]') Vị trí
-      each item, index in record
-        div(class='mt-[18px] font-[300] text-[12px]') #{item.position}  
-    div(class='font-[500]') Tiêu đề
-      each item, index in record
-        div(class='mt-[18px] text-[15px] font-[300] truncate w-[275px]') #{item.title} 
-    div(class='font-[500]') Trạng thái
-      each item, index in record
-        div(class='mt-[18px] rounded-[3px] text-center bg-[#78ADE2] text-white text-[12px] py-[3px]')
-          button() Hiển thị
-    div(class='font-[500]') Chức năng
-      each item, index in record
-        div(class='flex mt-[18px]')
-          button.bg-gray-500.text-white.rounded(class='ml-[5px] text-[12px] px-[8px] py-[3px]') <i class="fa-solid fa-file-pen"></i>
-          button.bg-yellow-500.text-white.rounded(class='ml-[5px] text-[12px] px-[8px] py-[3px]') <i class="fa-regular fa-pen-to-square"></i> 
-          button.bg-red-500.text-white.rounded(class='ml-[5px] text-[12px] px-[8px] py-[3px]') <i class="fa-regular fa-trash-can"></i>                    
+  if(role.permissions.includes("article_view"))
+    h1(class='mt-[18px] ml-[8px] text-[24px] font-bold') #{pageTitle} 
+    div(class='flex ml-[8px]')
+      +search(keyword)
+      button(class='w-[100px] h-[38px] bg-white border hover:bg-[#1876D2] rounded-[8px]')
+        a(
+            href=`/${prefixAdmin}/article/create`
+        ) + Thêm mới
+
+
+
+    each item, index in record
+      div(class='flex mx-[12px] mt-[30px] border px-[12px] py-[10px] bg-[#F8F8F8]')
+        div(class='mr-[12px] flex items-center')
+          img(
+            class='w-[150px] h-[200px] border'
+            src=item.thumbnail 
+            alt=item.thumbnail
+            )
+        div(class='ml-[12px] flex-1 px-[10px] py-[3px]')
+          div(class='flex flex-col')
+            span(class='text-[15px] font-[500]') Tiêu đề bài viết:<span class='text-[24px] ml-[8px]'>#{item.title}</span>
+            div(class='text-wrap line-clamp-5') <span class='font-[500]'>Mô Tả:</span> !{item.description}
+            if(role.permissions.includes("article_edit"))
+              if(item.status == 'active')
+                a(
+                  href='javascript:;'
+                  data-id = item.id
+                  data-status = item.status
+                  button-change-status
+                )
+                  span(class='text-[15px] font-[500]') Trạng thái:
+                  button(class='w-[120px] h-[35px] text-center border rounded-[3px] ml-[12px] bg-[#6BC85C]') Hiển thị
+              else 
+                a(
+                  href='javascript:;'
+                  data-id = item.id
+                  data-status = item.status
+                  button-change-status
+                )
+                  span(class='text-[15px] font-[500]') Trạng thái:
+                  button(class='w-[120px] h-[35px] text-center border rounded-[3px] ml-[12px] bg-[#FF0000]') Dừng hiển thị
+          div(class='flex flex-col')
+            p(class='') <span class='text-[15px] font-[500]'> Tạo bởi</span>: #{item.createdBy.fullName}
+              if(item.createdBy.createdAt)
+                +formatDate(item.createdBy.createdAt)
+                +formatTime(item.createdBy.createdAt)
+            p(class='') <span class='text-[15px] font-[500]'> Sửa bởi</span>: #{item.updatedBy.fullName}
+              if(item.updatedBy.updatedAt)
+                +formatDate(item.updatedBy.updatedAt)
+                +formatTime(item.updatedBy.updatedAt)
+          div(class='flex gap-[12px]')
+            a(href=`/${prefixAdmin}/article/detail/${item.id}`)
+              button(class='w-[50px] text-center border rounded-[3px] bg-[#DCDCDC]')
+                | <i class="fa-solid fa-file-pen"></i>
+            if(role.permissions.includes("article_edit"))
+              a(href=`/${prefixAdmin}/article/edit/${item.id}`)
+                button(class='w-[50px] text-center border rounded-[3px] bg-[#78ADE2]')
+                  | <i class="fa-regular fa-pen-to-square"></i>
+            if(role.permissions.includes("article_delete"))
+              button(class='w-[50px] text-center border rounded-[3px] bg-[#FF0000]')(button-delete data-id=item.id)
+                | <i class="fa-regular fa-trash-can"></i>
+
+
+
+
+
+  //-   table.border.border-gray-300(class='ml-[10px] my-[10px] w-[100%]' checkbox-multi)
+  //-     thead
+  //-       tr.bg-gray-200
+  //-           th.border.border-gray-300.px-2.py-2.text-left
+  //-               input(
+  //-                   type='checkbox'
+  //-                   name='checkall'
+  //-               ) 
+  //-           th.border.border-gray-300.px-2.py-2.text-left STT
+  //-           th.border.border-gray-300.px-4.py-2.text-left Hình Ảnh
+  //-           th.border.border-gray-300.px-4.py-2.text-left Tiêu Đề Bài Viết
+  //-           th Vị trí
+  //-           th.border.border-gray-300.px-4.py-2.text-left Tạo bởi
+  //-           th.border.border-gray-300.px-4.py-2.text-left Sửa bởi
+  //-           th.border.border-gray-300.px-4.py-2.text-left Trạng Thái
+  //-           th.border.border-gray-300.px-4.py-2.text-left Chức Năng
+  //-       each item, index in record    
+  //-           tr.bg-white.border.border-gray-300.px-4.py-2
+  //-               td.border.border-gray-300(class='hover:bg-gray-200 w-[48px]')
+  //-                   input(class='relative left-[25%]')(
+  //-                       type='checkbox'
+  //-                       name='id'
+  //-                       value=item.id
+  //-                   )
+  //-               td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200 w-[58px]') #{index + 1}
+  //-               td.border.border-gray-300.px-10.py-4(class='hover:bg-gray-200 w-[200px]')
+  //-                   img.w-16.h-16.object-cover(src=item.thumbnail alt=item.thumbnail)
+  //-               td.border.border-gray-300.px-10.py-4(class='hover:bg-gray-200 w-[262px] truncate') #{item.title}
+  //-               td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200 w-[80px]')
+  //-                 input(
+  //-                   type="number"
+  //-                   name="position"
+  //-                   style="width: 40px"
+  //-                   min="1"
+  //-                   value=item.position
+  //-                   class='border text-center'
+  //-                 )
+  //-               td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200')
+  //-                 p #{item.createdBy.fullName}
+  //-                 if(item.createdBy.createdAt)
+  //-                   +formatDate(item.createdBy.createdAt)
+  //-                   +formatTime(item.createdBy.createdAt)
+  //-               td.border.border-gray-300.px-4.py-4(class='hover:bg-gray-200')
+  //-                 p #{item.updatedBy.fullName}
+  //-                 if(item.updatedBy.updatedAt)
+  //-                   +formatDate(item.updatedBy.updatedAt)
+  //-                   +formatTime(item.updatedBy.updatedAt)
+  //-               td.border.border-gray-300.px-5.py-2(class='hover:bg-gray-200')
+  //-                 if(role.permissions.includes("article_edit"))
+  //-                   if(item.status == 'active')
+  //-                       a(
+  //-                           href='javascript:;' 
+  //-                           class="bg-blue-500 text-white px-2 py-1 rounded"
+  //-                           data-id = item.id 
+  //-                           data-status = item.status 
+  //-                           button-change-status
+  //-                       ) Hiển thị
+  //-                   else 
+  //-                       a(
+  //-                           href='javascript:;' 
+  //-                           class="bg-red-500 text-white px-2 py-1 rounded"
+  //-                           data-id = item.id 
+  //-                           data-status = item.status 
+  //-                           button-change-status
+  //-                       ) Dừng hiển thị    
+  //-               td.border.border-gray-300.px-10.py-2(class='hover:bg-gray-200')
+  //-                 a(href=`/${prefixAdmin}/article/detail/${item.id}`)
+  //-                   button.bg-gray-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-solid fa-file-pen"></i>    
+  //-                 if(role.permissions.includes("article_edit"))     
+  //-                   a(href=`/${prefixAdmin}/article/edit/${item.id}`)
+  //-                     button.bg-yellow-500.text-white.px-2.py-1.rounded(class='mr-[5px]') <i class="fa-regular fa-pen-to-square"></i>
+  //-                 if(role.permissions.includes("article_delete"))
+  //-                   button.bg-red-500.text-white.px-2.py-1.rounded(button-delete data-id=item.id) <i class="fa-regular fa-trash-can"></i>
+  +pagination(pagination)
+  form(
+    form-change-status 
+    action=""
+    method="POST"
+    data-path=`/${prefixAdmin}/article/change-status`
+  )
+  form(
+    form-delete-item 
+    action=""
+    method="POST"
+    data-path=`/${prefixAdmin}/article/delete`
+  ) 

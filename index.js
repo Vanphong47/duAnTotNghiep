@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const path = require("path"); // tinymce
 const moment = require("moment"); // định dạng thời gian
-
+const PayOs = require("./utils/payos"); // tạo mới 1 payos
 dotenv.config(); // khởi tạo dotenv
 
 database.connect();
@@ -29,6 +29,9 @@ app.use(methodOverride("_method")); // de ghi de duoc phuong thuc trong the form
 
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
+
+// app.use(express.static("public"));
+app.use(express.json());
 
 app.use(express.static(`${__dirname}/public`)); // nhúng file tĩnh
 
@@ -52,6 +55,11 @@ app.locals.moment = moment;
 routerClient(app);
 // routesAdmin
 routerAdmin(app);
+
+//404 Not Found
+app.get("*", (req, res) => {
+  res.redirect("/");
+});
 
 app.listen(port, () => {
   console.log(`Đang chạy trên cổng ${port}`);

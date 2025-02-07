@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug 
+
+block main
+
+  div(class='mt-[30px] ml-[8%]')
+    div(class='flex text-[#5C3F2C] items-center text-[12px] font-[600]') 
+      <i class="fa-solid fa-house-user mr-[8px]"></i>
+      a(href='/') TRANG CHỦ
+  h1(class='text-[24px] font-bold w-full text-start ml-[8%] mt-[20px] uppercase') #{pageTitle}:
+  div(class='mx-[8%] mt-[18px]')
+    | Bạn vui lòng chọn các phương thức thanh toán dưới đây, cảm ơn bạn vì đã tin và sử dụng dịch vụ của bên mình, chúc bạn có một ngày mới vui vẻ !
+  div(class='ml-[8%] mt-[18px]')
+    a(
+        href='/checkout'
+        class='border px-[8px] py-[5px] mr-[30px]'
+    ) Thanh toán trực tiếp 
+    div 
+        | Thanh toán trực tiếp khi bạn nhận hàng, hãy kiểm tra trước khi thanh toán với người giao hàng !
+    a(
+        href='/pay'
+        class='border px-[8px] py-[5px] mr-[30px]'
+    ) Thanh toán online
+    div 
+        | Thanh toán trực tuyến
