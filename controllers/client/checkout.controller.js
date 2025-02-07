@@ -15,7 +15,7 @@ module.exports.index = async (req, res) => {
         _id: item.product_id,
       }).select("thumbnail title slug price discountPercentage");
       product.priceNew = product.price * (1 - product.discountPercentage / 100);
-      product.priceNew = product.priceNew.toFixed(0);
+      product.priceNew = product.priceNew.toLocaleString("vi-VN");
       item.productInfo = product;
       item.totalPrice = item.quantity * product.priceNew;
       cart.totalPrice += item.totalPrice;
@@ -71,30 +71,26 @@ module.exports.order = async (req, res) => {
 };
 //[Get] /checkout/success/:orderId
 module.exports.success = async (req, res) => {
-  try {
-    const order = await Order.findOne({
-      _id: req.params.orderId,
+  const order = await Order.findOne({
+    _id: req.params.orderId,
+  });
+  order.totalPrice = 0;
+  for (const product of order.products) {
+    const infoProduct = await Product.findOne({
+      _id: product.product_id,
     });
-    order.totalPrice = 0;
-    for (const product of order.products) {
-      const infoProduct = await Product.findOne({
-        _id: product.product_id,
-      });
-      product.title = infoProduct.title;
-      product.thumbnail = infoProduct.thumbnail;
-      console.log(product.thumbnail);
-      product.priceNew = (
-        product.price *
-        (100 - product.discountPercentage / 100)
-      ).toFixed(0);
-      product.totalPrice = product.priceNew * product.quantity;
-      order.totalPrice += product.totalPrice;
-    }
-    res.render("client/pages/checkout/success", {
-      pageTitle: "Đặt hàng thành công!",
-      order: order,
-    });
-  } catch (error) {
-    console.log(error);
+    product.title = infoProduct.title;
+    product.thumbnail = infoProduct.thumbnail;
+    console.log(product.thumbnail);
+    product.priceNew = (
+      product.price *
+      (1 - product.discountPercentage / 100)
+    ).toLocaleString("vi-VN");
+    product.totalPrice = product.priceNew * product.quantity;
+    order.totalPrice += product.totalPrice;
   }
+  res.render("client/pages/checkout/success", {
+    pageTitle: "Đặt hàng thành công!",
+    order: order,
+  });
 };

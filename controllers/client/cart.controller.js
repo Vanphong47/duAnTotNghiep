@@ -7,6 +7,8 @@ module.exports.index = async (req, res) => {
   const cart = await Cart.findOne({
     _id: cartId,
   });
+  console.log(cart);
+  console.log(cartId);
   cart.totalPrice = 0;
   if (cart.products.length > 0) {
     for (const item of cart.products) {
@@ -14,7 +16,7 @@ module.exports.index = async (req, res) => {
         _id: item.product_id,
       }).select("thumbnail title slug price discountPercentage");
       product.priceNew = product.price * (1 - product.discountPercentage / 100);
-      product.priceNew = product.priceNew.toFixed(0);
+      product.priceNew = product.priceNew.toLocaleString("vi-VN");
       item.productInfo = product;
       item.totalPrice = item.quantity * product.priceNew;
       cart.totalPrice += item.totalPrice;
@@ -30,7 +32,6 @@ module.exports.addPost = async (req, res) => {
   const productId = req.params.productId;
   const quantity = parseInt(req.body.quantity);
   const cartId = req.cookies.cartId;
-  // console.log(exitProductInCart);
   console.log(productId);
   console.log(quantity);
   console.log(cartId);

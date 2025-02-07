@@ -19,7 +19,7 @@ module.exports.index = async (req, res) => {
     .skip(objectPagination.skip);
   for (const item of products) {
     item.priceNew = item.price * (1 - item.discountPercentage / 100);
-    item.priceNew = item.priceNew.toFixed(0);
+    item.priceNew = item.priceNew.toLocaleString("vi-VN");
   }
   // if (products.product_category_id) {
   //   const category = await productCategory.findOne({
@@ -112,7 +112,7 @@ module.exports.category = async (req, res) => {
       });
     for (const item of products) {
       item.priceNew = item.price * (1 - item.discountPercentage / 100);
-      item.priceNew = item.priceNew.toFixed(0);
+      item.priceNew = item.priceNew.toLocaleString("vi-VN");
     }
     res.render("client/pages/products/index", {
       pageTitle: "Danh sách sản phẩm",
@@ -135,7 +135,7 @@ module.exports.detail = async (req, res) => {
       status: "active",
     });
     product.priceNew = product.price * (1 - product.discountPercentage / 100);
-    product.priceNew = product.priceNew.toFixed(0);
+    product.priceNew = product.priceNew.toLocaleString("vi-VN");
     if (product.product_category_id) {
       const category = await productCategory.findOne({
         _id: product.product_category_id,

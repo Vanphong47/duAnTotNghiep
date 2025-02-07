@@ -53,8 +53,8 @@ block main
             i.fa-solid.fa-star(class='text-[#E8C592]')
             i.fa-regular.fa-star
           .flex
-            span(class='text-[18px] text-[#E56D6D] mr-[3px]') #{item.priceNew}đ
-            span(class='text-[12px] text-[#9C9C9C] line-through flex justify-center items-center') #{item.price}đ
+            span(class='text-[18px] text-[#E56D6D] mr-[3px]') #{item.priceNew.toLocaleString("vi-VN")}đ
+            span(class='text-[12px] text-[#9C9C9C] line-through flex justify-center items-center') #{item.price.toLocaleString("vi-VN")}đ
 
   .flex(class='mt-[40px]')
     .flex-1

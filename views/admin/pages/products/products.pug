@@ -82,7 +82,7 @@ block main
                     img.object-cover(class='h-[90px] w-[100px] flex-1' src=item.thumbnail alt=item.thumbnail)
                 td.border.border-gray-300.py-4(class=' pl-4') #{item.title}
                 td.border.border-gray-300.py-4(class=' pl-4') #{item.stock}
-                td.border.border-gray-300.py-4(class=' pl-4') #{item.price}$
+                td.border.border-gray-300.py-4(class=' pl-4') #{item.price.toLocaleString("vi-VN")}đ
                 td.border.border-gray-300.py-4(class=' pl-4')
                   input(
                     type="number"

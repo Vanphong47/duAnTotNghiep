@@ -9,16 +9,18 @@ block main
   h1(class='text-[24px] font-bold w-full text-start ml-[8%] mt-[20px] uppercase') #{pageTitle}:
   div(class='mx-[8%] mt-[18px]')
     | Bạn vui lòng chọn các phương thức thanh toán dưới đây, cảm ơn bạn vì đã tin và sử dụng dịch vụ của bên mình, chúc bạn có một ngày mới vui vẻ !
-  div(class='ml-[8%] mt-[18px]')
-    a(
-        href='/checkout'
-        class='border px-[8px] py-[5px] mr-[30px]'
-    ) Thanh toán trực tiếp 
-    div 
-        | Thanh toán trực tiếp khi bạn nhận hàng, hãy kiểm tra trước khi thanh toán với người giao hàng !
-    a(
-        href='/pay'
-        class='border px-[8px] py-[5px] mr-[30px]'
-    ) Thanh toán online
-    div 
-        | Thanh toán trực tuyến
+  div(class='mt-[18px] flex gap-[8%] justify-center items-center')
+    a(href='/checkout')
+      div(class='border px-[12px] py-[8px] bg-[#EFF1F5]')
+        p(class='flex justify-center items-center mb-[18px]') 
+          <i class="fa-solid fa-money-check-dollar text-[32px]"></i>
+        p(class='text-[18px]') Thanh toán trực tiếp
+    a(href='/pay')
+      div(class='border px-[12px] py-[8px] bg-[#EFF1F5]')
+        p(class='flex justify-center items-center mb-[18px]') 
+          <i class="fa-brands fa-cc-visa text-[32px]"></i>
+        p(class='text-[18px]') Thanh toán trực tuyến
+
+
+
+      

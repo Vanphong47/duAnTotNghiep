@@ -27,11 +27,11 @@ block main
               td(class='py-[5px] border-r')
                 img(src=item.productInfo.thumbnail alt=item.productInfo.title width='100%' ) 
               td(class='py-[5px] border-r') #{item.productInfo.title}
-              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.productInfo.priceNew}$
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.productInfo.priceNew}đ
               td(
                 class='py-[5px] border-r'
               ) #{item.quantity}
-              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.totalPrice}
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.totalPrice}đ
 
         else 
           tr(class='text-center text-[18px]') 
@@ -45,7 +45,7 @@ block main
       div(class='mt-[8px]')
         span(class='text-[#777777] text-[15px]') Thành tiền:
       div(class='mt-[8px]')
-        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}$
+        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}đ
 
   div(class='ml-[25%] group mt-[30px]') 
     a(
@@ -134,7 +134,7 @@ block main
           button(
             type='submit'         
             class='w-[300px] h-[37px] uppercase bg-[#E56D6D]'
-            id='pay-check'
+            
           ) Đặt hàng
           
       

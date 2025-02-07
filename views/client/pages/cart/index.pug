@@ -31,7 +31,7 @@ block main
                     class='text-[#1876D2]'
                     href=`/products/detail/${item.productInfo.slug}`
                 ) #{item.productInfo.title}
-              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.productInfo.priceNew}$
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.productInfo.priceNew}đ
               td(class='py-[5px] border-r')
                 input(
                 type="number"
@@ -41,7 +41,7 @@ block main
                 style='width: 60px'
                 class='border'
                 )
-              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.totalPrice}
+              td(class='py-[5px] text-[#E56D6D] font-[500] border-r') #{item.totalPrice}đ
               td(class='py-[5px] border-r')
                 a(
                 class='bg-[#FF0000] text-white rounded-[3px] px-[8px] py-[3px]'
@@ -59,12 +59,12 @@ block main
       div(class='mt-[8px]')
         span(class='text-[#777777] text-[15px]') Tạm tính
       div(class='mt-[8px]')
-        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}$
+        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}đ
     div(class='border-b-[3px] px-[5px] py-[3px] w-[50%] flex justify-between')
       div(class='mt-[8px]')
         span(class='text-[#777777] text-[15px]') Tổng
       div(class='mt-[8px]')
-        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}$
+        span(class='text-[#E56D6D] text-[18px] font-bold') #{cartDetail.totalPrice}đ
     div(class='mt-[12px] px-[5px] py-[8px] w-[50%] bg-[#FF5555] flex items-center justify-center')  
       a(
         href=`/checkout/checkOrder`
@@ -72,10 +72,10 @@ block main
       ) Tiến hành thanh toán
 
 
-  div(class='ml-[12%] group mt-[30px]') 
+  div(class='ml-[12%] group mt-[30px] ') 
     a(
       href='/products'
-      class='rounded-[3px] border-[3px] px-[5px] py-[5px] text-[#A06951] group-hover:bg-[#A06951] group-hover:text-white' style='border-color: #A06951'
+      class='rounded-[3px] border-[1px] px-[5px] py-[5px] text-[#EBCC9F] group-hover:bg-[#EBCC9F] group-hover:text-white' style='border-color: #EBCC9F'
     ) 
         <i class="fa-solid fa-arrow-left mr-[5px] "></i>
         pan(class=' font-bold ') Tiếp tục xem sản phẩm

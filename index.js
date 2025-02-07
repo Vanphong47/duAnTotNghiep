@@ -9,7 +9,6 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const path = require("path"); // tinymce
 const moment = require("moment"); // định dạng thời gian
-const PayOs = require("./utils/payos"); // tạo mới 1 payos
 dotenv.config(); // khởi tạo dotenv
 
 database.connect();

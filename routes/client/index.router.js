@@ -8,7 +8,6 @@ const checkOutRoute = require("./checkout.route.js");
 const payRoute = require("./pay.route.js");
 const userRouter = require("./user.router.js");
 const infomartionRouter = require("./information.js");
-const payOsRouter = require("./payOs.router.js");
 
 const categoryMiddleware = require("../../middlewares/client/category.middleware.js");
 const cartMiddleware = require("../../middlewares/client/cart.milddleware.js");
@@ -43,6 +42,4 @@ module.exports = (app) => {
   app.use("/user", userRouter);
 
   app.use("/information", infomartionRouter);
-
-  app.use("/payOs", payOsRouter);
 };
